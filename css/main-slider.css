@@ -1,0 +1,44 @@
+ul{
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	width: 4000px;
+}
+img{
+	max-width: 540px;
+}
+ul li{
+	display: inline-block;
+}
+.conteiner{
+	width: 720px;
+	height: 210px;
+	/*overflow: hidden;*/
+}
+.coll{
+	float: left;
+}
+.navi{
+	width: 30%;
+	/*box-sizing:border-box;*/
+}
+.gallery{
+	width: 70%;
+	/*box-sizing:border-box;*/
+	overflow: hidden;
+}
+.navi a{
+	display: block;
+	background: orange;
+	border: 1px solid red;
+	height: 52px;
+}
+.navi .active, .navi a:hover{
+	background: red;
+	border: 2px solid blue;
+
+}
+
+/*.notactive{
+	display: none;
+}*/

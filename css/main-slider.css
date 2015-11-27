@@ -31,7 +31,7 @@ ul li{
 	display: block;
 	background: orange;
 	border: 1px solid red;
-	height: 52px;
+	height: 50px;
 }
 .navi .active, .navi a:hover{
 	background: red;

@@ -38,7 +38,9 @@
 			var img = document.createElement('img');
 			$(img).attr('src', this.slides[j]).attr('value', (j));
 			$(img).addClass('classImg');
-			ul.appendChild(img);
+			var li = document.createElement('li');
+			ul.appendChild(li);
+			li.appendChild(img);
 		}
 		conteiner.appendChild(coll2);
 		this.root.appendChild(conteiner);

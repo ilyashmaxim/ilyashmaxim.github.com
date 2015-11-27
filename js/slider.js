@@ -1,6 +1,6 @@
 /*$(function() {*/
 
-(function() {
+(function($) {
 	'use strict';
 
 	function Slider(node, data) {
@@ -115,6 +115,6 @@
 		this.index++;
 	};
 	window.Slider = Slider;
-})();
+})($);
 
 /*});*/

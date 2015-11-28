@@ -13,18 +13,15 @@ ul li{
 .conteiner{
 	width: 720px;
 	height: 210px;
-	/*overflow: hidden;*/
 }
 .coll{
 	float: left;
 }
 .navi{
 	width: 30%;
-	/*box-sizing:border-box;*/
 }
 .gallery{
 	width: 70%;
-	/*box-sizing:border-box;*/
 	overflow: hidden;
 }
 .navi a{
@@ -36,9 +33,4 @@ ul li{
 .navi .active, .navi a:hover{
 	background: red;
 	border: 2px solid blue;
-
 }
-
-/*.notactive{
-	display: none;
-}*/

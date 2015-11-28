@@ -1,17 +1,17 @@
-/*$(function() {*/
-
 (function($) {
 	'use strict';
 
 	function Slider(node, data) {
-		//debugger;
 		this.root = node;
 		this.slides = data.slice();
 		this.Builder();
-		this.$selfy = $('.gallery>ul');
-		this.sizeImg = $('.classImg').eq(0).width();
-		this.index = 0;
-		this.marginStart = -this.sizeImg;
+		this.$imgConteiner = $('.gallery>ul');
+		this.sizeImg = null;
+		this.index = null;
+		this.duration = null;
+		this.marginStart = null;
+		this.interval = null;
+		this.setStartValue();
 		this.AnimateImg();
 		this.SelectImg();
 	}
@@ -36,71 +36,73 @@
 		coll2.appendChild(ul);
 		for (var j = 0; j < this.slides.length; j++) {
 			var img = document.createElement('img');
-			$(img).attr('src', this.slides[j]).attr('value', (j));
-			$(img).addClass('classImg');
+			$(img).attr({
+				'src': this.slides[j],
+				'value': (j)
+			}).addClass('classImg');
 			var li = document.createElement('li');
 			ul.appendChild(li);
 			li.appendChild(img);
 		}
 		conteiner.appendChild(coll2);
 		this.root.appendChild(conteiner);
-		$('.classImg').load(this);
 	};
-
+	Slider.prototype.setStartValue = function() {
+		this.sizeImg = $('.classImg').eq(0).width();
+		if (this.sizeImg !== 540) this.sizeImg = 540;
+		// $('.classImg').load(function() {
+		// 	this.sizeImg = $(this).width();
+		// });
+		this.index = 0;
+		this.duration = 800;
+		this.marginStart = -this.sizeImg;
+	};
 	Slider.prototype.SelectImg = function() {
 		var _self = this;
 		$('.navi').on('click', '.classLink', function(event) {
-			event.preventDefault();
 			var target = event.target;
 			var linkIndex = $(target).attr('value');
 			$('.navi').find('.active').removeClass('active');
 			$(target).addClass('active');
 			_self.marginStart = -(linkIndex) * _self.sizeImg;
-			_self.$selfy
+			_self.$imgConteiner
 				.css({
 					'margin-left': _self.marginStart
 				});
 			clearInterval(_self.interval);
 			_self.marginStart = 0;
-			setTimeout(_self.AnimateImg(), 3000);
+			_self.index = -1;
+			setTimeout(_self.AnimateImg.bind(_self), 3000);
 		});
 	};
 	Slider.prototype.AnimateImg = function() {
-		this.index = 0;
-		var duration = 800;
-		// var sizeImg = $('.classImg').width();
-		this.interval = setInterval(Anim.bind(this), 2000);
-
-		function Anim() {
-			//debugger;
-			var _self = this;
-			this.$selfy.animate({
-				'margin-left': _self.marginStart
-			}, duration, function() {
-				_self.HoverByIndex();
-				_self.marginStart -= _self.sizeImg;
-				if (_self.marginStart === -(_self.sizeImg * _self.slides.length)) {
-					_self.marginStart = 0;
-					duration = 100;
-				} else {
-					duration = 800;
-				}
-			});
-		}
+		this.interval = setInterval(this.ShiftImg.bind(this), 2000);
 	};
-
-	Slider.prototype.HoverByIndex = function() {
+	Slider.prototype.ShiftImg = function() {
+		//debugger;
 		var _self = this;
+		this.$imgConteiner.animate({
+			'margin-left': _self.marginStart
+		}, this.duration, function() {
+			_self.HoverByIndex();
+			_self.marginStart -= _self.sizeImg;
+			if (_self.marginStart === -(_self.sizeImg * _self.slides.length)) {
+				_self.marginStart = 0;
+				_self.duration = 100;
+			} else {
+				_self.duration = 800;
+			}
+		});
+	};
+	Slider.prototype.HoverByIndex = function() {
+		//debugger;
+		//var currentIndex = index||this.index;
 		if (this.index === this.slides.length) this.index = 0;
 		var nextIndex = this.index + 1;
-		if (nextIndex === this.slides.length) {
-			nextIndex = 0;
-		}
-		$('.navi').find('[value=' + _self.index + ']').removeClass('active');
+		if (nextIndex === this.slides.length) nextIndex = 0;
+		$('.navi').find('.active').removeClass('active');
 		$('.navi').find('[value=' + nextIndex + ']').addClass('active');
 		this.index++;
 	};
 	window.Slider = Slider;
 })($);
-
-/*});*/

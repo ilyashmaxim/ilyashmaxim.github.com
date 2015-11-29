@@ -11,6 +11,12 @@ var savedEmails = ['author@mail.com', 'foo@mail.com', 'tester@mail.com'];
 	var passwordRegExp = /^(?=.*\d)(?=.*[a-zA-Z])(?!.*\s).*$/;
 	var phoneRegExp = /^[\+](?=380)\d*$/;
 	var timing;
+	var errorType = {
+		mail: 'Error in email',
+		pass: 'Short or non correct password (only number or char)',
+		phone: 'Not international standart (+380*********)',
+		ruls: null,
+	};
 	var checkValid = {
 		mail: false,
 		pass: false,
@@ -21,10 +27,10 @@ var savedEmails = ['author@mail.com', 'foo@mail.com', 'tester@mail.com'];
 	function EmeilDynamicValid() {
 		var _self = this;
 		timing = setInterval(function() {
-			var email = document.getElementById('email'); 
+			var email = document.getElementById('email');
 			mailString = email.value;
 			if (mailString.search(mailRegExp) === -1) {
-				ShowError(_self);
+				ShowError(_self, errorType.mail);
 				checkValid.mail = false;
 			} else {
 				HideError(_self);
@@ -35,14 +41,14 @@ var savedEmails = ['author@mail.com', 'foo@mail.com', 'tester@mail.com'];
 	}
 	email.addEventListener('input', EmeilDynamicValid);
 
-	function ShowError(_this) {
+	function ShowError(_this, errorMassage) {
 		_this.classList.add('alert');
 		_this.classList.add('alert-danger');
 		_this.parentNode.classList.add('has-error');
 		if (_this.parentNode.lastChild.className !== 'alert alert-danger') {
 			var div = document.createElement('div');
 			div.className = 'alert alert-danger';
-			div.textContent = 'Error!';
+			div.textContent = errorMassage;
 			_this.parentNode.appendChild(div);
 		}
 	}
@@ -60,7 +66,7 @@ var savedEmails = ['author@mail.com', 'foo@mail.com', 'tester@mail.com'];
 	function PasswordValid() {
 		passwordString = password.value;
 		if (passwordString.length < 5 || passwordString.search(passwordRegExp) < 0) {
-			ShowError(this);
+			ShowError(this, errorType.pass);
 			checkValid.pass = false;
 		} else {
 			HideError(this);
@@ -75,7 +81,7 @@ var savedEmails = ['author@mail.com', 'foo@mail.com', 'tester@mail.com'];
 			phoneString = phone.value;
 			console.log(phoneString);
 			if (phoneString.search(phoneRegExp) === -1) {
-				ShowError(_self);
+				ShowError(_self, errorType.phone);
 				checkValid.phone = false;
 			} else {
 				HideError(_self);

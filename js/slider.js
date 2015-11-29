@@ -12,7 +12,6 @@
 		this.duration = null;
 		this.marginStart = null;
 		this.interval = null;
-		this.setStartValue();
 		this.AnimateImg();
 		this.SelectImg();
 	}
@@ -27,7 +26,10 @@
 				"href": "#",
 				"value": (i)
 			});
-			if (i === 0) $(link).addClass('active');
+			if (i === 0) {
+				var triangle = this.CreateTriange();
+				$(link).addClass('active').append(triangle);
+			}
 			coll1.appendChild(link);
 		}
 		conteiner.appendChild(coll1);
@@ -53,30 +55,28 @@
 		// $('.classImg').load(function() {
 		// 	this.sizeImg = $(this).width();
 		// });
-		this.slideIndex = 0;
+		this.slideIndex = -1;
 		this.duration = 800;
-		this.marginStart = -this.sizeImg;
+		this.marginStart = 0;
 	};
 	Slider.prototype.SelectImg = function() {
 		var _self = this;
 		this.$listMenu.on('click', '.classLink', function(event) {
 			_self.$imgConteiner.stop(true, true);
+			clearInterval(_self.interval);
 			var target = event.target;
 			var linkIndex = $(target).attr('value');
-			_self.$listMenu.find('.active').removeClass('active');
-			$(target).addClass('active');
+			_self.HoverByIndex(linkIndex);
 			_self.marginStart = -(linkIndex) * _self.sizeImg;
 			_self.$imgConteiner
 				.css({
 					'margin-left': _self.marginStart
 				});
-			clearInterval(_self.interval);
-			_self.marginStart = 0;
-			_self.slideIndex = -1;
 			setTimeout(_self.AnimateImg.bind(_self), 3000);
 		});
 	};
 	Slider.prototype.AnimateImg = function() {
+		this.setStartValue();
 		this.interval = setInterval(this.ShiftImg.bind(this), 2000);
 	};
 	Slider.prototype.ShiftImg = function() {
@@ -94,14 +94,20 @@
 			}
 		});
 	};
-	Slider.prototype.HoverByIndex = function() {
-		//var currentIndex = slideIndex||this.slideIndex;
+	Slider.prototype.HoverByIndex = function(index) {
+		var triangle = this.CreateTriange();
+		this.$listMenu.find('.triangle').remove();
 		if (this.slideIndex === this.slides.length) this.slideIndex = 0;
-		var nextIndex = this.slideIndex + 1;
+		var nextIndex = index || this.slideIndex + 1;
 		if (nextIndex === this.slides.length) nextIndex = 0;
 		this.$listMenu.find('.active').removeClass('active');
-		this.$listMenu.find('[value=' + nextIndex + ']').addClass('active');
+		this.$listMenu.find('[value=' + nextIndex + ']').addClass('active').append(triangle);
 		this.slideIndex++;
+	};
+	Slider.prototype.CreateTriange = function() {
+		var triangle = document.createElement('div');
+		$(triangle).addClass('triangle');
+		return triangle;
 	};
 	window.Slider = Slider;
 })($);

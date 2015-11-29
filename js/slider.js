@@ -5,7 +5,7 @@
 		this.$root = $(node);
 		this.slides = data.slice();
 		this.Builder();
-		this.$imgConteiner = this.$root.find('.gallery>ul');
+		this.$imgConteiner = this.$root.find('.holder');
 		this.$listMenu = this.$root.find('.navi');
 		this.sizeImg = null;
 		this.slideIndex = null;
@@ -33,17 +33,16 @@
 		conteiner.appendChild(coll1);
 		var coll2 = document.createElement('div');
 		$(coll2).addClass('coll gallery');
-		var ul = document.createElement('ul');
-		coll2.appendChild(ul);
+		var holder = document.createElement('div');
+		$(holder).addClass('holder');
+		coll2.appendChild(holder);
 		for (var j = 0; j < this.slides.length; j++) {
 			var img = document.createElement('img');
 			$(img).attr({
 				'src': this.slides[j],
 				'value': (j)
 			}).addClass('classImg');
-			var li = document.createElement('li');
-			ul.appendChild(li);
-			li.appendChild(img);
+			holder.appendChild(img);
 		}
 		conteiner.appendChild(coll2);
 		this.$root.append(conteiner);
@@ -61,6 +60,7 @@
 	Slider.prototype.SelectImg = function() {
 		var _self = this;
 		this.$listMenu.on('click', '.classLink', function(event) {
+			_self.$imgConteiner.stop(true, true);
 			var target = event.target;
 			var linkIndex = $(target).attr('value');
 			_self.$listMenu.find('.active').removeClass('active');
@@ -80,7 +80,6 @@
 		this.interval = setInterval(this.ShiftImg.bind(this), 2000);
 	};
 	Slider.prototype.ShiftImg = function() {
-		//debugger;
 		var _self = this;
 		this.$imgConteiner.animate({
 			'margin-left': _self.marginStart
@@ -96,7 +95,6 @@
 		});
 	};
 	Slider.prototype.HoverByIndex = function() {
-		//debugger;
 		//var currentIndex = slideIndex||this.slideIndex;
 		if (this.slideIndex === this.slides.length) this.slideIndex = 0;
 		var nextIndex = this.slideIndex + 1;

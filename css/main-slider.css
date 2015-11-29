@@ -1,14 +1,5 @@
-ul{
-	list-style-type: none;
-	padding: 0;
-	margin: 0;
-	width: 4000px;
-}
-img{
-	max-width: 540px;
-}
-ul li{
-	display: inline-block;
+.slider1, .slider2{
+	margin: 5px;
 }
 .conteiner{
 	width: 720px;
@@ -18,19 +9,32 @@ ul li{
 	float: left;
 }
 .navi{
-	width: 30%;
-}
-.gallery{
-	width: 70%;
-	overflow: hidden;
+	width: 25%;
+	height: 100%;
+	box-sizing:border-box;
 }
 .navi a{
 	display: block;
 	background: orange;
-	border: 1px solid red;
-	height: 50px;
+	outline: 1px solid red;
+	height: 25%;
+	text-decoration: none;
 }
 .navi .active, .navi a:hover{
 	background: red;
-	border: 2px solid blue;
+	outline:  1px solid blue;
+}
+.gallery{
+	width: 75%;
+	box-sizing:border-box;
+	overflow: hidden;
+	outline: 1px solid blue;
+}
+.holder{
+	width: 4000px;
+}
+img{
+	max-width: 540px;
+	height: 210px;
+	float: left;
 }

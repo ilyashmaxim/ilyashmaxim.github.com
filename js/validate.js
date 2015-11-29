@@ -34,7 +34,7 @@ var savedEmails = ['author@mail.com', 'foo@mail.com', 'tester@mail.com'];
 		email: false,
 		password: false,
 		phone: null,
-		ruls: null,
+		ruls: false,
 	};
 
 	function createValid(rulse, node) {
@@ -59,25 +59,25 @@ var savedEmails = ['author@mail.com', 'foo@mail.com', 'tester@mail.com'];
 		createValid(vaidate[id], type);
 	}
 
-	function ShowError(_this, errorMassage) {
-		_this.classList.add('alert');
-		_this.classList.add('alert-danger');
-		_this.parentNode.classList.add('has-error');
-		if (_this.parentNode.lastChild.className !== 'alert alert-danger') {
+	function ShowError(node, errorMassage) {
+		node.classList.add('alert');
+		node.classList.add('alert-danger');
+		node.parentNode.classList.add('has-error');
+		if (node.parentNode.lastChild.className !== 'alert alert-danger') {
 			var div = document.createElement('div');
 			div.className = 'alert alert-danger';
 			div.textContent = errorMassage;
-			_this.parentNode.appendChild(div);
+			node.parentNode.appendChild(div);
 		}
 	}
 
-	function HideError(_this) {
-		_this.classList.remove('alert');
-		_this.classList.remove('alert-danger');
-		_this.parentNode.classList.remove('has-error');
-		_this.classList.add('form-control');
-		if (_this.parentNode.lastChild.className === 'alert alert-danger') {
-			_this.parentNode.removeChild(_this.parentNode.lastChild);
+	function HideError(node) {
+		node.classList.remove('alert');
+		node.classList.remove('alert-danger');
+		node.parentNode.classList.remove('has-error');
+		node.classList.add('form-control');
+		if (node.parentNode.lastChild.className === 'alert alert-danger') {
+			node.parentNode.removeChild(node.parentNode.lastChild);
 		}
 	}
 

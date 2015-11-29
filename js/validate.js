@@ -1,7 +1,7 @@
-"Use Strict";
-(function() {
-
-	var usedEmails = ['author@mail.com', 'foo@mail.com', 'tester@mail.com'];
+var savedEmails = ['author@mail.com', 'foo@mail.com', 'tester@mail.com'];
+(function(emails) {
+	'Use Strict';
+	var usedEmails = emails.slice();
 	var form = document.forms[0];
 	var buttonSubmit = form.querySelector('button');
 	var mailString;
@@ -21,13 +21,13 @@
 	function EmeilDynamicValid() {
 		var _self = this;
 		timing = setInterval(function() {
+			var email = document.getElementById('email'); 
 			mailString = email.value;
-			console.log(mailString);
 			if (mailString.search(mailRegExp) === -1) {
-				AddClassError(_self);
+				ShowError(_self);
 				checkValid.mail = false;
 			} else {
-				AddClassNormal(_self);
+				HideError(_self);
 				clearInterval(timing);
 				checkValid.mail = true;
 			}
@@ -35,7 +35,7 @@
 	}
 	email.addEventListener('input', EmeilDynamicValid);
 
-	function AddClassError(_this) {
+	function ShowError(_this) {
 		_this.classList.add('alert');
 		_this.classList.add('alert-danger');
 		_this.parentNode.classList.add('has-error');
@@ -47,7 +47,7 @@
 		}
 	}
 
-	function AddClassNormal(_this) {
+	function HideError(_this) {
 		_this.classList.remove('alert');
 		_this.classList.remove('alert-danger');
 		_this.parentNode.classList.remove('has-error');
@@ -60,10 +60,10 @@
 	function PasswordValid() {
 		passwordString = password.value;
 		if (passwordString.length < 5 || passwordString.search(passwordRegExp) < 0) {
-			AddClassError(this);
+			ShowError(this);
 			checkValid.pass = false;
 		} else {
-			AddClassNormal(this);
+			HideError(this);
 			checkValid.pass = true;
 		}
 	}
@@ -75,10 +75,10 @@
 			phoneString = phone.value;
 			console.log(phoneString);
 			if (phoneString.search(phoneRegExp) === -1) {
-				AddClassError(_self);
+				ShowError(_self);
 				checkValid.phone = false;
 			} else {
-				AddClassNormal(_self);
+				HideError(_self);
 				clearInterval(timing1);
 				checkValid.phone = true;
 			}
@@ -110,4 +110,4 @@
 	}
 
 	form.addEventListener('submit', GlobalValid);
-})();
+})(savedEmails);

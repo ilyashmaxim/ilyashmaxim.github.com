@@ -59,10 +59,22 @@ var savedEmails = ['author@mail.com', 'foo@mail.com', 'tester@mail.com'];
 		createValid(vaidate[id], type);
 	}
 
+		function findParent(node) {
+		var container;
+
+		(function findContainer(node) {
+			if (node.parentNode.classList.contains('form-group')) {
+				return container = node.parentNode;
+			} else {
+				findContainer(node.parentNode);
+			}
+		})(node);
+		return container;
+	}
+
 	function ShowError(node, errorMassage) {
-		node.classList.add('alert');
-		node.classList.add('alert-danger');
-		node.parentNode.classList.add('has-error');
+		var container = findParent(node);
+		container.classList.add('has-error');
 		if (node.parentNode.lastChild.className !== 'alert alert-danger') {
 			var div = document.createElement('div');
 			div.className = 'alert alert-danger';
@@ -72,10 +84,8 @@ var savedEmails = ['author@mail.com', 'foo@mail.com', 'tester@mail.com'];
 	}
 
 	function HideError(node) {
-		node.classList.remove('alert');
-		node.classList.remove('alert-danger');
-		node.parentNode.classList.remove('has-error');
-		node.classList.add('form-control');
+		var container = findParent(node);
+		container.classList.remove('has-error');
 		if (node.parentNode.lastChild.className === 'alert alert-danger') {
 			node.parentNode.removeChild(node.parentNode.lastChild);
 		}

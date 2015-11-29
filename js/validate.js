@@ -1,39 +1,63 @@
 var savedEmails = ['author@mail.com', 'foo@mail.com', 'tester@mail.com'];
 (function(emails) {
-	'Use Strict';
+	'use strict';
 	var usedEmails = emails.slice();
 	var form = document.forms[0];
 	var buttonSubmit = form.querySelector('button');
-	var regExp = {
-		mail: /\w+@\w+\.\w+/,
-		password: /^(?=.*\d)(?=.*[a-zA-Z])(?!.*\s).*$/,
-		phone: /^[\+](?=380)\d*$/,
-	};
-	var errorType = {
-		mail: 'Error in email',
-		pass: 'Short or non correct password (only number or char)',
-		phone: 'Not international standart (+380*********)',
-		ruls: null,
+	var vaidate = {
+		email: {
+			errorType: 'Error in email',
+			func: function(someString) {
+				return someString.search(/\w+@\w+\.\w+/) === -1;
+			},
+		},
+		password: {
+			errorType: 'Short or non correct password (only number or char)',
+			func: function(someString) {
+				return someString.length < 5 || someString.search(/^(?=.*\d)(?=.*[a-zA-Z])(?!.*\s).*$/) === -1;
+			},
+		},
+		phone: {
+			errorType: 'Not international standart (+380*********)',
+			func: function(someString) {
+				return someString.search(/^[\+](?=380)\d*$/) === -1;
+			},
+		},
+		rulse: {
+			errorType: 'Must be checked',
+			func: function(someString, node) {
+				return !node.checked;
+			},
+		},
 	};
 	var checkValid = {
-		mail: false,
-		pass: false,
+		email: false,
+		password: false,
 		phone: null,
 		ruls: null,
 	};
 
-	function EmeilDynamicValid() {
-		var email = document.getElementById('email');
-		var mailString = email.value;
-		if (mailString.search(regExp.mail) === -1) {
-			ShowError(this, errorType.mail);
-			checkValid.mail = false;
-		} else {
-			HideError(this);
-			checkValid.mail = true;
+	function createValid(rulse, node) {
+		function someValid() {
+			var rulseToValid = rulse;
+			var stringForValid = node.value;
+			var nodeID = node.id;
+			if (rulseToValid.func(stringForValid, node)) {
+				ShowError(node, rulseToValid.errorType);
+				checkValid[nodeID] = false;
+			} else {
+				HideError(node);
+				checkValid[nodeID] = true;
+			}
+			GlobalValid();
 		}
+		node.addEventListener('click', someValid);
+		node.addEventListener('input', someValid);
 	}
-	email.addEventListener('input', EmeilDynamicValid);
+	for (var id in vaidate) {
+		var type = document.getElementById(id);
+		createValid(vaidate[id], type);
+	}
 
 	function ShowError(_this, errorMassage) {
 		_this.classList.add('alert');
@@ -57,51 +81,17 @@ var savedEmails = ['author@mail.com', 'foo@mail.com', 'tester@mail.com'];
 		}
 	}
 
-	function PasswordValid() {
-		var password = document.getElementById('password');
-		var passwordString = password.value;
-		if (passwordString.length < 5 || passwordString.search(regExp.password) < 0) {
-			ShowError(this, errorType.pass);
-			checkValid.pass = false;
-		} else {
-			HideError(this);
-			checkValid.pass = true;
-		}
-	}
-	password.addEventListener('input', PasswordValid);
-
-	function PhoneValid() {
-		var phone = document.getElementById('phone');
-		var phoneString = phone.value;
-		if (phoneString.search(regExp.phone) === -1) {
-			ShowError(this, errorType.phone);
-			checkValid.phone = false;
-		} else {
-			HideError(this);
-			checkValid.phone = true;
-		}
-	}
-	phone.addEventListener('input', PhoneValid);
-
-	function CheckValid() {
-		if (form.elements[4].checked) {
-			buttonSubmit.classList.remove('disabled');
-			checkValid.ruls = true;
-		} else {
-			buttonSubmit.classList.add('disabled');
-			checkValid.ruls = false;
-		}
-	}
-	form.elements[4].addEventListener('click', CheckValid);
-
 	function GlobalValid() {
 		var keys = [];
 		for (var prop in checkValid) {
 			keys.push(checkValid[prop]);
 		}
 		if (keys.indexOf(false) === -1) {
+			buttonSubmit.classList.remove('disabled');
 			return true;
 		} else {
+			//event.preventDefault();
+			buttonSubmit.classList.add('disabled');
 			return false;
 		}
 	}

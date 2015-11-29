@@ -2,12 +2,13 @@
 	'use strict';
 
 	function Slider(node, data) {
-		this.root = node;
+		this.$root = $(node);
 		this.slides = data.slice();
 		this.Builder();
-		this.$imgConteiner = $('.gallery>ul');
+		this.$imgConteiner = this.$root.find('.gallery>ul');
+		this.$listMenu = this.$root.find('.navi');
 		this.sizeImg = null;
-		this.index = null;
+		this.slideIndex = null;
 		this.duration = null;
 		this.marginStart = null;
 		this.interval = null;
@@ -45,24 +46,24 @@
 			li.appendChild(img);
 		}
 		conteiner.appendChild(coll2);
-		this.root.appendChild(conteiner);
+		this.$root.append(conteiner);
 	};
 	Slider.prototype.setStartValue = function() {
-		this.sizeImg = $('.classImg').eq(0).width();
+		this.sizeImg = this.$root.find('.classImg').eq(0).width();
 		if (this.sizeImg !== 540) this.sizeImg = 540;
 		// $('.classImg').load(function() {
 		// 	this.sizeImg = $(this).width();
 		// });
-		this.index = 0;
+		this.slideIndex = 0;
 		this.duration = 800;
 		this.marginStart = -this.sizeImg;
 	};
 	Slider.prototype.SelectImg = function() {
 		var _self = this;
-		$('.navi').on('click', '.classLink', function(event) {
+		this.$listMenu.on('click', '.classLink', function(event) {
 			var target = event.target;
 			var linkIndex = $(target).attr('value');
-			$('.navi').find('.active').removeClass('active');
+			_self.$listMenu.find('.active').removeClass('active');
 			$(target).addClass('active');
 			_self.marginStart = -(linkIndex) * _self.sizeImg;
 			_self.$imgConteiner
@@ -71,7 +72,7 @@
 				});
 			clearInterval(_self.interval);
 			_self.marginStart = 0;
-			_self.index = -1;
+			_self.slideIndex = -1;
 			setTimeout(_self.AnimateImg.bind(_self), 3000);
 		});
 	};
@@ -96,13 +97,13 @@
 	};
 	Slider.prototype.HoverByIndex = function() {
 		//debugger;
-		//var currentIndex = index||this.index;
-		if (this.index === this.slides.length) this.index = 0;
-		var nextIndex = this.index + 1;
+		//var currentIndex = slideIndex||this.slideIndex;
+		if (this.slideIndex === this.slides.length) this.slideIndex = 0;
+		var nextIndex = this.slideIndex + 1;
 		if (nextIndex === this.slides.length) nextIndex = 0;
-		$('.navi').find('.active').removeClass('active');
-		$('.navi').find('[value=' + nextIndex + ']').addClass('active');
-		this.index++;
+		this.$listMenu.find('.active').removeClass('active');
+		this.$listMenu.find('[value=' + nextIndex + ']').addClass('active');
+		this.slideIndex++;
 	};
 	window.Slider = Slider;
 })($);

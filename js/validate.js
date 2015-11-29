@@ -4,12 +4,11 @@ var savedEmails = ['author@mail.com', 'foo@mail.com', 'tester@mail.com'];
 	var usedEmails = emails.slice();
 	var form = document.forms[0];
 	var buttonSubmit = form.querySelector('button');
-	var mailString;
-	var passwordString;
-	var phoneString;
-	var mailRegExp = /\w+@\w+\.\w+/;
-	var passwordRegExp = /^(?=.*\d)(?=.*[a-zA-Z])(?!.*\s).*$/;
-	var phoneRegExp = /^[\+](?=380)\d*$/;
+	var regExp = {
+		mail: /\w+@\w+\.\w+/,
+		password: /^(?=.*\d)(?=.*[a-zA-Z])(?!.*\s).*$/,
+		phone: /^[\+](?=380)\d*$/,
+	};
 	var errorType = {
 		mail: 'Error in email',
 		pass: 'Short or non correct password (only number or char)',
@@ -24,14 +23,13 @@ var savedEmails = ['author@mail.com', 'foo@mail.com', 'tester@mail.com'];
 	};
 
 	function EmeilDynamicValid() {
-		var _self = this;
 		var email = document.getElementById('email');
-		mailString = email.value;
-		if (mailString.search(mailRegExp) === -1) {
-			ShowError(_self, errorType.mail);
+		var mailString = email.value;
+		if (mailString.search(regExp.mail) === -1) {
+			ShowError(this, errorType.mail);
 			checkValid.mail = false;
 		} else {
-			HideError(_self);
+			HideError(this);
 			checkValid.mail = true;
 		}
 	}
@@ -61,8 +59,8 @@ var savedEmails = ['author@mail.com', 'foo@mail.com', 'tester@mail.com'];
 
 	function PasswordValid() {
 		var password = document.getElementById('password');
-		passwordString = password.value;
-		if (passwordString.length < 5 || passwordString.search(passwordRegExp) < 0) {
+		var passwordString = password.value;
+		if (passwordString.length < 5 || passwordString.search(regExp.password) < 0) {
 			ShowError(this, errorType.pass);
 			checkValid.pass = false;
 		} else {
@@ -73,19 +71,15 @@ var savedEmails = ['author@mail.com', 'foo@mail.com', 'tester@mail.com'];
 	password.addEventListener('input', PasswordValid);
 
 	function PhoneValid() {
-		var _self = this;
-		var timing1 = setInterval(function() {
-			phoneString = phone.value;
-			console.log(phoneString);
-			if (phoneString.search(phoneRegExp) === -1) {
-				ShowError(_self, errorType.phone);
-				checkValid.phone = false;
-			} else {
-				HideError(_self);
-				clearInterval(timing1);
-				checkValid.phone = true;
-			}
-		}, 4000);
+		var phone = document.getElementById('phone');
+		var phoneString = phone.value;
+		if (phoneString.search(regExp.phone) === -1) {
+			ShowError(this, errorType.phone);
+			checkValid.phone = false;
+		} else {
+			HideError(this);
+			checkValid.phone = true;
+		}
 	}
 	phone.addEventListener('input', PhoneValid);
 

@@ -34,7 +34,7 @@ var savedEmails = ['author@mail.com', 'foo@mail.com', 'tester@mail.com'];
 		email: false,
 		password: false,
 		phone: null,
-		ruls: false,
+		rulse: false,
 	};
 
 	function createValid(rulse, node) {

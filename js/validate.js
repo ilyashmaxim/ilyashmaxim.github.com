@@ -10,7 +10,6 @@ var savedEmails = ['author@mail.com', 'foo@mail.com', 'tester@mail.com'];
 	var mailRegExp = /\w+@\w+\.\w+/;
 	var passwordRegExp = /^(?=.*\d)(?=.*[a-zA-Z])(?!.*\s).*$/;
 	var phoneRegExp = /^[\+](?=380)\d*$/;
-	var timing;
 	var errorType = {
 		mail: 'Error in email',
 		pass: 'Short or non correct password (only number or char)',
@@ -26,18 +25,15 @@ var savedEmails = ['author@mail.com', 'foo@mail.com', 'tester@mail.com'];
 
 	function EmeilDynamicValid() {
 		var _self = this;
-		timing = setInterval(function() {
-			var email = document.getElementById('email');
-			mailString = email.value;
-			if (mailString.search(mailRegExp) === -1) {
-				ShowError(_self, errorType.mail);
-				checkValid.mail = false;
-			} else {
-				HideError(_self);
-				clearInterval(timing);
-				checkValid.mail = true;
-			}
-		}, 3000);
+		var email = document.getElementById('email');
+		mailString = email.value;
+		if (mailString.search(mailRegExp) === -1) {
+			ShowError(_self, errorType.mail);
+			checkValid.mail = false;
+		} else {
+			HideError(_self);
+			checkValid.mail = true;
+		}
 	}
 	email.addEventListener('input', EmeilDynamicValid);
 
@@ -64,6 +60,7 @@ var savedEmails = ['author@mail.com', 'foo@mail.com', 'tester@mail.com'];
 	}
 
 	function PasswordValid() {
+		var password = document.getElementById('password');
 		passwordString = password.value;
 		if (passwordString.length < 5 || passwordString.search(passwordRegExp) < 0) {
 			ShowError(this, errorType.pass);

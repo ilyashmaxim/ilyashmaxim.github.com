@@ -10,16 +10,16 @@
 }
 .navi{
 	width: 25%;
-	height: 100%;
-	box-sizing:border-box;
+	height: 210px;
 }
 .navi a{
 	display: block;
 	background: orange;
-	outline: 1px solid red;
+	border: 1px solid red;
 	height: 25%;
 	text-decoration: none;
 	position: relative;
+	box-sizing:border-box;
 }
 .navi .active, .navi a:hover{
 	background: red;
@@ -28,7 +28,8 @@
 	width: 75%;
 	box-sizing:border-box;
 	overflow: hidden;
-	outline: 1px solid blue;
+	border: 1px solid blue;
+	height: 210px;
 }
 .holder{
 	width: 4000px;

@@ -11,6 +11,7 @@
 		this.slideIndex = null;
 		this.duration = null;
 		this.marginStart = null;
+		this.timing = null;
 		this.interval = null;
 		this.AnimateImg();
 		this.SelectImg();
@@ -63,6 +64,7 @@
 		var _self = this;
 		this.$listMenu.on('click', '.classLink', function(event) {
 			_self.$imgConteiner.stop(true, true);
+			clearTimeout(_self.timing);
 			clearInterval(_self.interval);
 			var target = event.target;
 			var linkIndex = $(target).attr('value');
@@ -72,7 +74,7 @@
 				.css({
 					'margin-left': _self.marginStart
 				});
-			setTimeout(_self.AnimateImg.bind(_self), 3000);
+			_self.timing = setTimeout(_self.AnimateImg.bind(_self), 3000);
 		});
 	};
 	Slider.prototype.AnimateImg = function() {

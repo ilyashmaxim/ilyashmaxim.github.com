@@ -76,6 +76,9 @@
 				});
 			_self.timing = setTimeout(_self.AnimateImg.bind(_self), 3000);
 		});
+		this.$listMenu.on('mouseenter mouseleave','.classLink', function() {
+			$(this).toggleClass("hoverS");
+		});
 	};
 	Slider.prototype.AnimateImg = function() {
 		this.setStartValue();

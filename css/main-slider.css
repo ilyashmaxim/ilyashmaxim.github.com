@@ -21,7 +21,7 @@
 	position: relative;
 	box-sizing:border-box;
 }
-.navi .active, .navi a:hover{
+.navi .active, .navi .hoverS{
 	background: red;
 }
 .gallery{

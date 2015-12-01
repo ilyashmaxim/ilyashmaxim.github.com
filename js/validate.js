@@ -98,7 +98,6 @@ var savedEmails = ['author@mail.com', 'foo@mail.com', 'tester@mail.com'];
 		}
 		if (keys.indexOf(false) === -1) {
 			buttonSubmit.classList.remove('disabled');
-			return true;
 		} else {
 			//event.preventDefault();
 			buttonSubmit.classList.add('disabled');

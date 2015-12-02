@@ -21,10 +21,8 @@
 	position: relative;
 	box-sizing:border-box;
 }
-@media all and (not handheld){
-	.navi a:hover{
-		background: red;
-	}
+@media screen{
+	.navi a:hover{background: red;}
 }
 .navi .active{
 	background: red;

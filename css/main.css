@@ -1,7 +1,4 @@
-body{
-	width: 100%;
-}
-.main{
-	width: 75%;
-	margin: 0 auto;
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
 }

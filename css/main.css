@@ -4,3 +4,6 @@
 .jumbotron{
   text-align:center;
 }
+.col-lg-6 .thumbnails>li{
+	list-style-type: none;
+}

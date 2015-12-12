@@ -1,20 +1,23 @@
-"use strict";
 (function() {
+	'use strict';
+
 	function Timer(elem) {
 		this.root = elem;
 		this.secondmeter = this.BuildHtml();
 		this.root.appendChild(this.secondmeter);
-		this.MouseEventAdd();
-		this.KeyEventAdd();
+		this.btnStart = this.secondmeter.querySelector('.btn-primary');
+		this.btnLap = this.secondmeter.querySelector('.btn-info');
+		this.btnReset = this.secondmeter.querySelector('.btn-danger');
+		this.timeTable = this.secondmeter.querySelector('.stopwatch-curretn');
+		this.stopwatchLaps = this.secondmeter.querySelector('.stopwatch-laps');
 		this.timeNow = null;
 		this.timeValue = 0;
-		this.btnStart;
-		this.btnLap;
-		this.btnReset;
-		this.timeTable;
+		this.startTime = 0;
+		this.pastTime = 0;
+		this.MouseEventAdd();
+		this.KeyEventAdd();
 	}
 	Timer.prototype.BuildHtml = function() {
-		// debugger;
 		var conteiner = document.createElement('div');
 		conteiner.classList.add('container');
 		var row = document.createElement('div');
@@ -31,28 +34,28 @@
 		btnGroup.classList.add('btn-group');
 		btnGroup.classList.add('btn-group-lg');
 		col1.appendChild(btnGroup);
-		this.btnStart = document.createElement('button');
-		this.btnStart.classList.add('btn');
-		this.btnStart.classList.add('btn-primary');
-		this.btnStart.textContent = 'Start';
-		btnGroup.appendChild(this.btnStart);
-		this.btnLap = document.createElement('button');
-		this.btnLap.classList.add('btn');
-		this.btnLap.classList.add('btn-info');
-		this.btnLap.textContent = 'Lap';
-		btnGroup.appendChild(this.btnLap);
-		this.btnReset = document.createElement('button');
-		this.btnReset.classList.add('btn');
-		this.btnReset.classList.add('btn-danger');
-		this.btnReset.textContent = 'Reset';
-		col1.appendChild(this.btnReset);
-		this.timeTable = document.createElement('h2');
-		this.timeTable.classList.add('stopwatch-curretn');
-		this.timeTable.innerHTML = '<span>00:00:00:000</span>';
-		col.appendChild(this.timeTable);
-		this.stopwatchLaps = document.createElement('div');
-		this.stopwatchLaps.classList.add('stopwatch-laps');
-		col.appendChild(this.stopwatchLaps);
+		var start = document.createElement('button');
+		start.classList.add('btn');
+		start.classList.add('btn-primary');
+		start.textContent = 'Start';
+		btnGroup.appendChild(start);
+		var lap = document.createElement('button');
+		lap.classList.add('btn');
+		lap.classList.add('btn-info');
+		lap.textContent = 'Lap';
+		btnGroup.appendChild(lap);
+		var reset = document.createElement('button');
+		reset.classList.add('btn');
+		reset.classList.add('btn-danger');
+		reset.textContent = 'Reset';
+		col1.appendChild(reset);
+		var table = document.createElement('h2');
+		table.classList.add('stopwatch-curretn');
+		table.innerHTML = '<span>00:00:00:000</span>';
+		col.appendChild(table);
+		var lapsConteiner = document.createElement('div');
+		lapsConteiner.classList.add('stopwatch-laps');
+		col.appendChild(lapsConteiner);
 		return conteiner;
 	};
 	Timer.prototype.BuildNewLap = function() {
@@ -73,29 +76,23 @@
 			this.stopwatchLaps.removeChild(target.parentNode);
 	};
 	Timer.prototype.ResetLap = function() {
-		//var lapList = this.stopwatchLaps.childNodes;
 		while (this.stopwatchLaps.childNodes.length > 0) {
 			var i = 0;
 			this.stopwatchLaps.removeChild(this.stopwatchLaps.childNodes[i]);
-			console.log(this.stopwatchLaps.childNodes.length > 0);
 		}
-		console.log('we are heare');
 		this.TimeStop();
+		this.pastTime = 0;
 		this.timeValue = null;
 		this.timeTable.textContent = "00:00:00:000";
 	};
-	// Timer.prototype.StartTimeTable = function() {
-	// 	this.startTime = new Date().getTime();
-	// };
+	Timer.prototype.StartTimeTable = function() {
+		this.startTime = new Date().getTime();
+	};
 	Timer.prototype.TimeGenerator = function() {
-		this.timeValue += 100;
-		// if (!this.timeValue) {
-		//var currentTime = new Date().getTime();
-		// 	this.timeValue = currentTime - this.startTime;
-		// } else {
-		// 	this.timeValue = this.timeValue - this.startTime;
-		// }
-		//this.timeValue = currentTime - this.startTime;
+		var currentTime = new Date().getTime();
+		this.pastTime += currentTime - this.startTime;
+		this.timeValue = this.pastTime;
+		this.startTime = currentTime;
 		this.TimeFormat();
 	};
 	Timer.prototype.TimeFormat = function() {
@@ -119,7 +116,7 @@
 	};
 	Timer.prototype.TimeRun = function() {
 		if (!this.timeNow) {
-			//this.StartTimeTable();
+			this.StartTimeTable();
 			this.timeNow = setInterval(
 				this.TimeGenerator.bind(this), 100);
 		} else {

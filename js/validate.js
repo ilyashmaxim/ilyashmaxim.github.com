@@ -1,7 +1,5 @@
-var savedEmails = ['author@mail.com', 'foo@mail.com', 'tester@mail.com'];
-(function(emails) {
+(function() {
 	'use strict';
-	var usedEmails = emails.slice();
 	var form = document.forms[0];
 	var buttonSubmit = form.querySelector('button');
 	var vaidate = {
@@ -59,7 +57,7 @@ var savedEmails = ['author@mail.com', 'foo@mail.com', 'tester@mail.com'];
 		createValid(vaidate[id], type);
 	}
 
-		function findParent(node) {
+	function findParent(node) {
 		var container;
 
 		(function findContainer(node) {
@@ -106,4 +104,4 @@ var savedEmails = ['author@mail.com', 'foo@mail.com', 'tester@mail.com'];
 	}
 
 	form.addEventListener('submit', GlobalValid);
-})(savedEmails);
+})();

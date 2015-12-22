@@ -36,6 +36,7 @@
 	};
 
 	function createValid(rulse, node) {
+
 		function someValid() {
 			var rulseToValid = rulse;
 			var stringForValid = node.value;
@@ -90,7 +91,7 @@
 				ShowError(node, "Email used");
 				checkValid[nodeID] = false;
 			} else {
-				HideError(node);
+				//HideError(node);
 				checkValid[nodeID] = true;
 			}
 		}

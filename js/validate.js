@@ -72,14 +72,14 @@
 		request.open('get', './js/mail.json');
 		request.onreadystatechange = function() {
 			if (request.readyState === READY_STATE) {
-				callback(request.responseText);
+				callback(request.responseText,node);
 			}
 		};
 		request.send();
 		return request;
 	}
 
-	function CheckUniqMail(resp) {
+	function CheckUniqMail(resp, node) {
 		var stringForValid = node.value;
 		var nodeID = node.id;
 		var requestParse = JSON.parse(resp);

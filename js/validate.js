@@ -54,7 +54,7 @@
 		function AJAXValid() {
 			var checkMailRequest;
 			if (checkMailRequest) checkMailRequest.stop();
-			checkMailRequest = SendRequest(CheckUniqMail,this);
+			checkMailRequest = SendRequest(CheckUniqMail, this);
 		}
 		if (node.id === 'email') {
 			node.addEventListener('input', AJAXValid);
@@ -67,13 +67,13 @@
 		createValid(vaidate[id], type);
 	}
 
-	function SendRequest(callback,node) {
+	function SendRequest(callback, node) {
 		var request = new XMLHttpRequest();
 		var READY_STATE = 4;
 		request.open('get', './js/mail.json');
 		request.onreadystatechange = function() {
 			if (request.readyState === READY_STATE) {
-				callback(request.responseText,node);
+				callback(request.responseText, node);
 			}
 		};
 		request.send();
@@ -85,13 +85,10 @@
 		var nodeID = node.id;
 		var requestParse = JSON.parse(resp);
 		for (var key in requestParse) {
-			//debugger
-			console.log(requestParse[key]);
 			if (requestParse[key].indexOf(stringForValid) !== -1) {
 				ShowError(node, "Email used");
 				checkValid[nodeID] = false;
 			} else {
-				//HideError(node);
 				checkValid[nodeID] = true;
 			}
 		}

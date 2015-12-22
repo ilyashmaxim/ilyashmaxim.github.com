@@ -49,12 +49,52 @@
 			}
 			GlobalValid();
 		}
+
+		function AJAXValid() {
+			var checkMailRequest;
+			if (checkMailRequest) checkMailRequest.stop();
+			checkMailRequest = SendRequest(CheckUniqMail);
+		}
+		if (node.id === 'email') {
+			node.addEventListener('input', AJAXValid);
+		}
 		node.addEventListener('click', someValid);
 		node.addEventListener('input', someValid);
 	}
 	for (var id in vaidate) {
 		var type = document.getElementById(id);
 		createValid(vaidate[id], type);
+	}
+
+	function SendRequest(callback) {
+		var request = new XMLHttpRequest();
+		var READY_STATE = 4;
+		request.open('get', './js/mail.json');
+		request.onreadystatechange = function() {
+			if (request.readyState === READY_STATE) {
+				callback(request.responseText);
+			}
+		};
+		request.send();
+		return request;
+	}
+
+	function CheckUniqMail(resp) {
+		var stringForValid = node.value;
+		var nodeID = node.id;
+		var requestParse = JSON.parse(resp);
+		for (var key in requestParse) {
+			//debugger
+			console.log(requestParse[key]);
+			if (requestParse[key].indexOf(stringForValid) !== -1) {
+				ShowError(node, "Email used");
+				checkValid[nodeID] = false;
+			} else {
+				HideError(node);
+				checkValid[nodeID] = true;
+			}
+		}
+		GlobalValid();
 	}
 
 	function findParent(node) {

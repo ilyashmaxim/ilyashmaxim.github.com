@@ -53,7 +53,7 @@
 		function AJAXValid() {
 			var checkMailRequest;
 			if (checkMailRequest) checkMailRequest.stop();
-			checkMailRequest = SendRequest(CheckUniqMail);
+			checkMailRequest = SendRequest(CheckUniqMail,this);
 		}
 		if (node.id === 'email') {
 			node.addEventListener('input', AJAXValid);
@@ -66,7 +66,7 @@
 		createValid(vaidate[id], type);
 	}
 
-	function SendRequest(callback) {
+	function SendRequest(callback,node) {
 		var request = new XMLHttpRequest();
 		var READY_STATE = 4;
 		request.open('get', './js/mail.json');

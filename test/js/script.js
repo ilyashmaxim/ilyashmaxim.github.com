@@ -10,7 +10,7 @@
 		this.descriptionInfoBox = {};
 		this.noteInfoBox = {};
 		this.productUrlInfoBox = {};
-		this.Box = this.GetInfo(this.Builder, this);
+		this.GetInfo(this.Builder, this);
 		console.log(this.Box);
 	}
 	InfoBox.prototype.Builder = function(data, _self) {
@@ -28,7 +28,7 @@
 		request.open('get', './src/info_box.json');
 		request.onreadystatechange = function() {
 			if (request.readyState === READY_STATE) {
-				callback(request.responseText, _self);
+				_self.Box = callback(request.responseText, _self);
 			}
 		};
 		request.send();

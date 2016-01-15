@@ -15,7 +15,7 @@
 	InfoBox.prototype.Builder = function(data, _self) {
 		_self.data1 = JSON.parse(data);
 		var container = document.createElement('div');
-		$(conteiner).addClass('conteiner');
+		$(container).addClass('container');
 
 		console.log(_self.data1);
 		return container;

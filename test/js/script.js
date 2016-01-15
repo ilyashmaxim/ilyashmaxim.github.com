@@ -11,6 +11,7 @@
 		this.noteInfoBox = {};
 		this.productUrlInfoBox = {};
 		this.Box = this.GetInfo(this.Builder, this);
+		console.log(this.Box);
 	}
 	InfoBox.prototype.Builder = function(data, _self) {
 		_self.data1 = JSON.parse(data);

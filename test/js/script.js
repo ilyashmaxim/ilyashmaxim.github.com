@@ -4,16 +4,21 @@
 	function InfoBox(node) {
 		debugger;
 		this.$root = $(node);
-		this.imgInfoBox = [];
-		this.titleInfoBox = [];
-		this.descriptionInfoBox = [];
-		this.noteInfoBox = [];
-		this.productUrlInfoBox = [];
-		this.GetInfo(this.Builder, this);
+		this.data1=[];
+		this.Box = null;
+		this.titleInfoBox = {};
+		this.descriptionInfoBox = {};
+		this.noteInfoBox = {};
+		this.productUrlInfoBox = {};
+		this.Box = this.GetInfo(this.Builder, this);
 	}
 	InfoBox.prototype.Builder = function(data, node) {
-		var data1 = JSON.parse(data);
-		console.log(data1);
+		this.data1 = JSON.parse(data);
+		var container=createElement('div');
+		$(conteiner).addClass('conteiner');
+
+		console.log(this.data1);
+		return container;
 	};
 
 	InfoBox.prototype.GetInfo = function(callback, node) {

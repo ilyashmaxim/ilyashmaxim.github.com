@@ -12,7 +12,7 @@
 		this.GetInfo(this.Builder, this);
 	}
 	InfoBox.prototype.Builder = function(data, node) {
-		var data1 = data;
+		var data1 = JSON.parse(data);
 		console.log(data1);
 	};
 

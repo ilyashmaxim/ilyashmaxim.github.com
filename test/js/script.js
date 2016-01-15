@@ -4,7 +4,7 @@
 	function InfoBox(node) {
 		debugger;
 		this.$root = $(node);
-		this.data1=[];
+		this.data1 = [];
 		this.Box = null;
 		this.titleInfoBox = {};
 		this.descriptionInfoBox = {};
@@ -12,22 +12,22 @@
 		this.productUrlInfoBox = {};
 		this.Box = this.GetInfo(this.Builder, this);
 	}
-	InfoBox.prototype.Builder = function(data, node) {
-		node.data1 = JSON.parse(data);
-		var container=createElement('div');
+	InfoBox.prototype.Builder = function(data, _self) {
+		_self.data1 = JSON.parse(data);
+		var container = document.createElement('div');
 		$(conteiner).addClass('conteiner');
 
-		console.log(node.data1);
+		console.log(_self.data1);
 		return container;
 	};
 
-	InfoBox.prototype.GetInfo = function(callback, node) {
+	InfoBox.prototype.GetInfo = function(callback, _self) {
 		var request = new XMLHttpRequest();
 		var READY_STATE = 4;
 		request.open('get', './src/info_box.json');
 		request.onreadystatechange = function() {
 			if (request.readyState === READY_STATE) {
-				callback(request.responseText, node);
+				callback(request.responseText, _self);
 			}
 		};
 		request.send();

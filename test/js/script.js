@@ -13,11 +13,11 @@
 		this.Box = this.GetInfo(this.Builder, this);
 	}
 	InfoBox.prototype.Builder = function(data, node) {
-		this.data1 = JSON.parse(data);
+		node.data1 = JSON.parse(data);
 		var container=createElement('div');
 		$(conteiner).addClass('conteiner');
 
-		console.log(this.data1);
+		console.log(node.data1);
 		return container;
 	};
 

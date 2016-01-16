@@ -78,15 +78,15 @@
 			if (i === 0) $(product).addClass('active');
 			else $(product).addClass('not-active');
 			var headerInfo = document.createElement('h3');
-			$(headerInfo).text(_self.data1.title)
+			$(headerInfo).text(_self.data1[i].title)
 				.addClass('headerInfo');
 			var img = document.createElement('img');
-			$(img).text(_self.data1.img);
+			$(img).text(_self.data1[i].img);
 			var bodyInfo = document.createElement('div');
 			var descriptionInfo = document.createElement('p');
-			$(descriptionInfo).text(_self.data1.description);
+			$(descriptionInfo).text(_self.data1[i].description);
 			var noteInfo = document.createElement('p');
-			$(noteInfo).text(_self.data1.note);
+			$(noteInfo).text(_self.data1[i].note);
 			$(bodyInfo).addClass('bodyInfo')
 				.append(descriptionInfo)
 				.append(noteInfo);

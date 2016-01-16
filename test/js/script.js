@@ -73,8 +73,9 @@
 	};
 	InfoBox.prototype.AddProductInfo = function() {
 		//_self.data1 = JSON.parse(data);
+		//var $container = this.$root.find('container>productView');
 		$.getJSON('./src/info_box.json', {}, function(json) {
-			var $container = this.$root.find('container>productView');
+			var $container = $('container>productView');
 			for (var i = 0; i < _self.data1.length; i += 1) {
 				var product = document.createElement('div');
 				if (i === 0) $(product).addClass('active');

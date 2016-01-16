@@ -85,7 +85,7 @@
 					.addClass('headerInfo');
 				var img = document.createElement('img');
 				$(img).attr({
-					src: json[i].img
+					src: '/src/img' + json[i].img
 				});
 				var bodyInfo = document.createElement('div');
 				var descriptionInfo = document.createElement('p');
@@ -101,7 +101,7 @@
 				$container.append(product);
 			}
 		});
-		
+
 	};
 
 	InfoBox.prototype.GetInfo = function(callback, _self, node) {

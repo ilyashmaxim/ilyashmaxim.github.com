@@ -82,13 +82,14 @@
 				.addClass('headerInfo');
 			var img = document.createElement('img');
 			$(img).text(_self.data1.img);
-			var bodyInfo = document.createElement('div')
-				.addClass('bodyInfo');
+			var bodyInfo = document.createElement('div');
 			var descriptionInfo = document.createElement('p');
 			$(descriptionInfo).text(_self.data1.description);
 			var noteInfo = document.createElement('p');
 			$(noteInfo).text(_self.data1.note);
-			$(bodyInfo).append(descriptionInfo).append(noteInfo);
+			$(bodyInfo).addClass('bodyInfo')
+				.append(descriptionInfo)
+				.append(noteInfo);
 			$(product).append(img)
 				.append(headerInfo)
 				.append(bodyInfo);

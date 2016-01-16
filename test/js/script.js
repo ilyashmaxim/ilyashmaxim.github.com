@@ -72,7 +72,7 @@
 	};
 	InfoBox.prototype.AddProductInfo = function(data, _self, node) {
 		_self.data1 = JSON.parse(data);
-		var container = $(node).find('container>productView');
+		var $container = $(node).find('container>productView');
 		for (var i = 0; i < _self.data1.length; i += 1) {
 			var product = document.createElement('div');
 			if (i === 0) $(product).addClass('active');
@@ -93,7 +93,7 @@
 			$(product).append(img)
 				.append(headerInfo)
 				.append(bodyInfo);
-			$(container).append(product);
+			$container.append(product);
 		}
 	};
 

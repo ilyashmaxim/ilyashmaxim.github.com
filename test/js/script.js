@@ -8,7 +8,8 @@
 		this.Box = null;
 		this.Box = this.Builder();
 		this.$root.append(this.Box);
-		this.GetInfo(this.AddProductInfo, this, this.$root);
+		this.AddProductInfo();
+		//this.GetInfo(this.AddProductInfo, this, this.$root);
 	}
 	InfoBox.prototype.Builder = function() {
 		var container = document.createElement('div');
@@ -70,33 +71,36 @@
 		$(container).append(productView).append(naviView);
 		return container;
 	};
-	InfoBox.prototype.AddProductInfo = function(data, _self, node) {
-		_self.data1 = JSON.parse(data);
-		var $container = $(node).find('container>productView');
-		for (var i = 0; i < _self.data1.length; i += 1) {
-			var product = document.createElement('div');
-			if (i === 0) $(product).addClass('active');
-			else $(product).addClass('not-active');
-			var headerInfo = document.createElement('h3');
-			$(headerInfo).text(_self.data1[i].title)
-				.addClass('headerInfo');
-			var img = document.createElement('img');
-			$(img).attr({
-				src: '_self.data1[i].img'
-			});
-			var bodyInfo = document.createElement('div');
-			var descriptionInfo = document.createElement('p');
-			$(descriptionInfo).text(_self.data1[i].description);
-			var noteInfo = document.createElement('p');
-			$(noteInfo).text(_self.data1[i].note);
-			$(bodyInfo).addClass('bodyInfo')
-				.append(descriptionInfo)
-				.append(noteInfo);
-			$(product).append(img)
-				.append(headerInfo)
-				.append(bodyInfo);
-			$container.append(product);
-		}
+	InfoBox.prototype.AddProductInfo = function() {
+		//_self.data1 = JSON.parse(data);
+		$.getJSON('./src/info_box.json', {}, function(json) {
+			var $container = this.$root.find('container>productView');
+			for (var i = 0; i < _self.data1.length; i += 1) {
+				var product = document.createElement('div');
+				if (i === 0) $(product).addClass('active');
+				else $(product).addClass('not-active');
+				var headerInfo = document.createElement('h3');
+				$(headerInfo).text(json[i].title)
+					.addClass('headerInfo');
+				var img = document.createElement('img');
+				$(img).attr({
+					src: 'json[i].img'
+				});
+				var bodyInfo = document.createElement('div');
+				var descriptionInfo = document.createElement('p');
+				$(descriptionInfo).text(json[i].description);
+				var noteInfo = document.createElement('p');
+				$(noteInfo).text(json[i].note);
+				$(bodyInfo).addClass('bodyInfo')
+					.append(descriptionInfo)
+					.append(noteInfo);
+				$(product).append(img)
+					.append(headerInfo)
+					.append(bodyInfo);
+				$container.append(product);
+			}
+		});
+		
 	};
 
 	InfoBox.prototype.GetInfo = function(callback, _self, node) {

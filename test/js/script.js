@@ -85,7 +85,7 @@
 					.addClass('headerInfo');
 				var img = document.createElement('img');
 				$(img).attr({
-					src: 'json[i].img'
+					src: json[i].img
 				});
 				var bodyInfo = document.createElement('div');
 				var descriptionInfo = document.createElement('p');

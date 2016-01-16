@@ -8,7 +8,7 @@
 		this.Box = null;
 		this.Box = this.Builder();
 		this.$root.append(this.Box);
-		this.GetInfo(this.AddProductInfo, this);
+		this.GetInfo(this.AddProductInfo, this, this.$root);
 	}
 	InfoBox.prototype.Builder = function() {
 		var container = document.createElement('div');
@@ -70,9 +70,9 @@
 		$(container).append(productView).append(naviView);
 		return container;
 	};
-	InfoBox.prototype.AddProductInfo = function(data, _self) {
+	InfoBox.prototype.AddProductInfo = function(data, _self, node) {
 		_self.data1 = JSON.parse(data);
-		var node = _self.$('container>productView');
+		var container = $(node).find('container>productView');
 		for (var i = 0; i < _self.data1.length; i += 1) {
 			var product = document.createElement('div');
 			if (i === 0) $(product).addClass('active');
@@ -92,17 +92,17 @@
 			$(product).append(img)
 				.append(headerInfo)
 				.append(bodyInfo);
-			$(node).append(product);
+			$(container).append(product);
 		}
 	};
 
-	InfoBox.prototype.GetInfo = function(callback, _self) {
+	InfoBox.prototype.GetInfo = function(callback, _self, node) {
 		var request = new XMLHttpRequest();
 		var READY_STATE = 4;
 		request.open('get', './src/info_box.json');
 		request.onreadystatechange = function() {
 			if (request.readyState === READY_STATE) {
-				callback(request.responseText, _self);
+				callback(request.responseText, _self, node);
 			}
 		};
 		request.send();

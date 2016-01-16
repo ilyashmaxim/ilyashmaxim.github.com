@@ -81,7 +81,9 @@
 			$(headerInfo).text(_self.data1[i].title)
 				.addClass('headerInfo');
 			var img = document.createElement('img');
-			$(img).text(_self.data1[i].img);
+			$(img).attr({
+				src: '_self.data1[i].img'
+			});
 			var bodyInfo = document.createElement('div');
 			var descriptionInfo = document.createElement('p');
 			$(descriptionInfo).text(_self.data1[i].description);

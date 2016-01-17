@@ -70,7 +70,7 @@
 		//$(productView).addClass('productView');
 		$(productView).addClass('productView').each(function(element) {
 			$.getJSON('./src/info_box.json', function(json) {
-				var $container = $(element);
+				var $container = $(index, element);
 				//var $container = $('container').find('productView');
 				for (var i = 0; i < json.length; i += 1) {
 					var product = document.createElement('div');

@@ -8,7 +8,7 @@
 		this.Box = null;
 		this.Box = this.Builder();
 		this.$root.append(this.Box);
-		//this.AddProductInfo();
+		this.AddProductInfo();
 	}
 	InfoBox.prototype.Builder = function() {
 		var container = document.createElement('div');
@@ -66,8 +66,8 @@
 		}
 
 		var productView = document.createElement('div');
-		//$(productView).addClass('productView');
-		$(productView).addClass('productView').each(function(index, element) {
+		$(productView).addClass('productView');
+		/*$(productView).addClass('productView').each(function(index, element) {
 			$.getJSON('./src/info_box.json', function(json) {
 				var $container = $(element);
 				//var $container = $('container').find('productView');
@@ -96,42 +96,42 @@
 					$container.append(product);
 				}
 			});
-		});
+		});*/
 
 		$(container).append(productView).append(naviView);
 		return container;
 	};
 	InfoBox.prototype.AddProductInfo = function() {
-		//_self.data1 = JSON.parse(data);
-		//var $container = this.$root.find('container>productView');
-		$.getJSON('./src/info_box.json', {}, function(json) {
-			var $container = $('container>productView');
-			for (var i = 0; i < json.length; i += 1) {
-				var product = document.createElement('div');
-				if (i === 0) $(product).addClass('active');
-				else $(product).addClass('not-active');
-				var headerInfo = document.createElement('h3');
-				$(headerInfo).text(json[i].title)
-					.addClass('headerInfo');
-				var img = document.createElement('img');
-				$(img).attr({
-					src: 'src/img/' + json[i].img
-				});
-				var bodyInfo = document.createElement('div');
-				var descriptionInfo = document.createElement('p');
-				$(descriptionInfo).text(json[i].description);
-				var noteInfo = document.createElement('p');
-				$(noteInfo).text(json[i].note);
-				$(bodyInfo).addClass('bodyInfo')
-					.append(descriptionInfo)
-					.append(noteInfo);
-				$(product).append(img)
-					.append(headerInfo)
-					.append(bodyInfo);
-				$container.append(product);
-			}
+		var $node = this.$root.find('container>productView');
+		$node.each(function(index, element) {
+			$.getJSON('./src/info_box.json', {}, function(json) {
+				var $container = $(element);
+				for (var i = 0; i < json.length; i += 1) {
+					var product = document.createElement('div');
+					if (i === 0) $(product).addClass('active');
+					else $(product).addClass('not-active');
+					var headerInfo = document.createElement('h3');
+					$(headerInfo).text(json[i].title)
+						.addClass('headerInfo');
+					var img = document.createElement('img');
+					$(img).attr({
+						src: 'src/img/' + json[i].img
+					});
+					var bodyInfo = document.createElement('div');
+					var descriptionInfo = document.createElement('p');
+					$(descriptionInfo).text(json[i].description);
+					var noteInfo = document.createElement('p');
+					$(noteInfo).text(json[i].note);
+					$(bodyInfo).addClass('bodyInfo')
+						.append(descriptionInfo)
+						.append(noteInfo);
+					$(product).append(img)
+						.append(headerInfo)
+						.append(bodyInfo);
+					$container.append(product);
+				}
+			});
 		});
-
 	};
 
 	InfoBox.prototype.InfoBoxEvent = function() {};

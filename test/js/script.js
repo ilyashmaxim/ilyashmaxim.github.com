@@ -68,7 +68,7 @@
 
 		var productView = document.createElement('div');
 		$(productView).addClass('productView').each(function() {
-			$.getJSON('./src/info_box.json', {}, function(json) {
+			$.getJSON('./src/info_box.json', function(json) {
 				var $container = $('container').find('productView');
 				for (var i = 0; i < json.length; i += 1) {
 					var product = document.createElement('div');

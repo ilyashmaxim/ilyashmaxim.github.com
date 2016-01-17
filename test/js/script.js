@@ -9,7 +9,6 @@
 		this.Box = this.Builder();
 		this.$root.append(this.Box);
 		//this.AddProductInfo();
-		//this.GetInfo(this.AddProductInfo, this, this.$root);
 	}
 	InfoBox.prototype.Builder = function() {
 		var container = document.createElement('div');
@@ -135,17 +134,6 @@
 
 	};
 
-	InfoBox.prototype.GetInfo = function(callback, _self, node) {
-		var request = new XMLHttpRequest();
-		var READY_STATE = 4;
-		request.open('get', './src/info_box.json');
-		request.onreadystatechange = function() {
-			if (request.readyState === READY_STATE) {
-				callback(request.responseText, _self, node);
-			}
-		};
-		request.send();
-	};
 	InfoBox.prototype.InfoBoxEvent = function() {};
 	window.InfoBox = InfoBox;
 })($);

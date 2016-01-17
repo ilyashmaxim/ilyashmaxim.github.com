@@ -79,7 +79,7 @@
 						.addClass('headerInfo');
 					var img = document.createElement('img');
 					$(img).attr({
-						src: '/src/img/' + json[i].img
+						src: 'src/img/' + json[i].img
 					});
 					var bodyInfo = document.createElement('div');
 					var descriptionInfo = document.createElement('p');
@@ -114,7 +114,7 @@
 					.addClass('headerInfo');
 				var img = document.createElement('img');
 				$(img).attr({
-					src: '/src/img/' + json[i].img
+					src: 'src/img/' + json[i].img
 				});
 				var bodyInfo = document.createElement('div');
 				var descriptionInfo = document.createElement('p');

@@ -102,7 +102,7 @@
 		return container;
 	};
 	InfoBox.prototype.AddProductInfo = function() {
-		var $node = this.$root.find('container>productView');
+		var $node = this.$root.find('.productView');
 		$node.each(function(index, element) {
 			$.getJSON('./src/info_box.json', {}, function(json) {
 				var $container = $(element);

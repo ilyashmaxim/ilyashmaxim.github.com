@@ -5,6 +5,7 @@
 		debugger;
 		this.$root = $(node);
 		this.productIndex = 1;
+		this.productMarginTop = 0;
 		this.Box = this.Builder();
 		this.$root.append(this.Box);
 		this.AddProductInfo();
@@ -111,6 +112,7 @@
 		var _self = this;
 		var $buttonNext = $(this.Box).find('.naviView');
 		$buttonNext.on('click', '.btn', _self.ShowProduct.bind(_self));
+		$buttonNext.on('click', '.show_detail', _self.HideProduct.bind(_self));
 	};
 	InfoBox.prototype.ShowProduct = function(event) {
 		var target = event.currentTarget;
@@ -147,5 +149,21 @@
 			});
 		}
 	};
+
+	InfoBox.prototype.HideProduct = function(event) {
+		var target = event.currentTarget;
+		var $product = $('.product').filter('[value=' + this.productIndex + ']');
+		var curentText = target.content;
+		var newText = 'Hide Detail';
+		if (this.productMarginTop === 0) this.productMarginTop -= 200;
+		else this.productMarginTop = 0;
+		$product.css({
+			'margin-top': this.productMarginTop + 'px'
+		});
+		if (curentText !== newText) curentText = newText;
+		else curentText = 'Show Detail';
+		$(target).text(curentText);
+	};
+
 	window.InfoBox = InfoBox;
 })($);

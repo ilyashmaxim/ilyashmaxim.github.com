@@ -127,21 +127,24 @@
 				$nextImg = $products.filter('[value=' + (this.productIndex + 1) + ']');
 			}
 			this.productIndex += 1;
-		}
-		if ($(target).hasClass('btn_left')) {
+			Show();
+		} else if ($(target).hasClass('btn_left')) {
 			if (this.productIndex === 1) {
 				$nextImg = $products.filter('[value=' + $products.length + ']');
 			} else {
 				$nextImg = $products.filter('[value=' + (this.productIndex - 1) + ']');
 			}
 			this.productIndex -= 1;
+			Show();
+		} else {
+			this.productIndex = this.productIndex;
 		}
-		$('.productView').animate(800, function() {
-			$activeImg.addClass('not-active').removeClass('active');
-			$nextImg.addClass('active').removeClass('not-active');
-
-		});
-
+		function Show() {
+			$('.productView').animate(800, function() {
+				$activeImg.addClass('not-active').removeClass('active');
+				$nextImg.addClass('active').removeClass('not-active');
+			});
+		}
 	};
 	window.InfoBox = InfoBox;
 })($);

@@ -58,7 +58,7 @@
 			var text = document.createElement('span');
 			$(text).text(btnsData.contents)
 				.addClass('text_' + btnsData.position);
-			$(btn).addClass(key)
+			$(btn).addClass('btn ' + key)
 				.append(button_bg)
 				.append(btn_ic)
 				.append(text);
@@ -110,7 +110,7 @@
 	InfoBox.prototype.InfoBoxEvent = function() {
 		var _self = this;
 		var $buttonNext = $(this.Box).find('.naviView');
-		$buttonNext.on('click', 'div', _self.ShowProduct.bind(_self));
+		$buttonNext.on('click', '.btn', _self.ShowProduct.bind(_self));
 	};
 	InfoBox.prototype.ShowProduct = function(event) {
 		var target = event.currentTarget;
@@ -139,6 +139,7 @@
 		} else {
 			this.productIndex = this.productIndex;
 		}
+
 		function Show() {
 			$('.productView').animate(800, function() {
 				$activeImg.addClass('not-active').removeClass('active');

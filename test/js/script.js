@@ -4,8 +4,7 @@
 	function InfoBox(node) {
 		debugger;
 		this.$root = $(node);
-		this.data1 = [];
-		this.Box = null;
+		this.productIndex = 1;
 		this.Box = this.Builder();
 		this.$root.append(this.Box);
 		this.AddProductInfo();
@@ -82,7 +81,7 @@
 					if (i === 0) activeClass = 'product active';
 					else activeClass = 'product not-active';
 					$(product).addClass(activeClass).attr({
-						value: i
+						value: i + 1
 					});
 					var headerInfo = document.createElement('h3');
 					$(headerInfo).text(json[i].title)

@@ -75,10 +75,14 @@
 		$node.each(function(index, element) {
 			$.getJSON('./src/info_box.json', {}, function(json) {
 				var $container = $(element);
+				var activeClass;
 				for (var i = 0; i < json.length; i += 1) {
 					var product = document.createElement('div');
-					if (i === 0) $(product).addClass('active');
-					else $(product).addClass('not-active');
+					if (i === 0) activeClass = 'product active';
+					else activeClass = 'product not-active';
+					$(product).addClass(activeClass).attr({
+						value: i
+					});
 					var headerInfo = document.createElement('h3');
 					$(headerInfo).text(json[i].title)
 						.addClass('headerInfo');
@@ -103,6 +107,41 @@
 		});
 	};
 
-	InfoBox.prototype.InfoBoxEvent = function() {};
+	InfoBox.prototype.InfoBoxEvent = function() {
+		var _self = this;
+		var $buttonNext = $(this.Box).find('.naviView');
+		$buttonNext.on('click', 'div', _self.ShowProduct.bind(_self));
+	};
+	InfoBox.prototype.ShowProduct = function(event) {
+		var target = event.currentTarget;
+		var $products = $(this.Box).find('.product');
+		var $activeImg;
+		var $nextImg;
+		if (this.productIndex > $products.length) this.productIndex = 1;
+		if (this.productIndex < 1) this.productIndex = $products.length;
+		$activeImg = $products.filter('[value=' + this.productIndex + ']');
+		if ($(target).hasClass('btn_right')) {
+			if (this.productIndex === $products.length) {
+				$nextImg = $products.filter('[value=' + 1 + ']');
+			} else {
+				$nextImg = $products.filter('[value=' + (this.productIndex + 1) + ']');
+			}
+			this.productIndex += 1;
+		}
+		if ($(target).hasClass('btn_left')) {
+			if (this.productIndex === 1) {
+				$nextImg = $products.filter('[value=' + $products.length + ']');
+			} else {
+				$nextImg = $products.filter('[value=' + (this.productIndex - 1) + ']');
+			}
+			this.productIndex -= 1;
+		}
+		$('.productView').animate(800, function() {
+			$activeImg.addClass('not-active').removeClass('active');
+			$nextImg.addClass('active').removeClass('not-active');
+
+		});
+
+	};
 	window.InfoBox = InfoBox;
 })($);

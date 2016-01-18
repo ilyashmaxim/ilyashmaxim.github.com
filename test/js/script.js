@@ -9,6 +9,7 @@
 		this.Box = this.Builder();
 		this.$root.append(this.Box);
 		this.AddProductInfo();
+		this.InfoBoxEvent();
 	}
 	InfoBox.prototype.Builder = function() {
 		var container = document.createElement('div');

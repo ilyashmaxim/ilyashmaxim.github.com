@@ -103,7 +103,7 @@
 					var descriptionInfo = document.createElement('p');
 					$(descriptionInfo).text(json[i].description);
 					var noteInfo = document.createElement('p');
-					$(noteInfo).text('*' + json[i].note);
+					$(noteInfo).text(json[i].note);
 					$(bodyInfo).addClass('bodyInfo')
 						.append(descriptionInfo)
 						.append(noteInfo);

@@ -16,6 +16,9 @@
 .productView p,.naviView a{
 	font-size: 10px;
 }
+.bodyInfo:last-child{
+	color:lightgray;
+}
 .headerInfo,.show_detail,.bodyInfo,.naviView{
 	margin: 10px;
 }

@@ -53,11 +53,11 @@
 			var btn = document.createElement('div');
 			var button_bg = document.createElement('img');
 			$(button_bg).attr({
-				'src': btnsData.urlSelected,
+				'src': btnsData.url1,
 			}).addClass('button_bg');
 			var button_bg_selected = document.createElement('img');
 			$(button_bg_selected).attr({
-				'src': btnsData.url1,
+				'src': btnsData.urlSelected,
 			}).addClass('button_bg selected');
 			var btn_ic = document.createElement('img');
 			$(btn_ic).attr({
@@ -68,6 +68,7 @@
 				.addClass('text_' + btnsData.position);
 			$(btn).addClass('btn ' + key)
 				.append(button_bg)
+				.append(button_bg_selected)
 				.append(btn_ic)
 				.append(text);
 			$(naviView).append(btn);

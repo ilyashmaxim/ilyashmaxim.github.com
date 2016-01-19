@@ -103,7 +103,7 @@
 					var descriptionInfo = document.createElement('p');
 					$(descriptionInfo).text(json[i].description);
 					var noteInfo = document.createElement('p');
-					$(noteInfo).text(json[i].note);
+					$(noteInfo).text('*' + json[i].note);
 					$(bodyInfo).addClass('bodyInfo')
 						.append(descriptionInfo)
 						.append(noteInfo);
@@ -161,15 +161,17 @@
 	};
 
 	InfoBox.prototype.HideProduct = function(event) {
+		var _self = this;
 		var target = event.currentTarget;
 		var $product = $('.product').filter('[value=' + this.productIndex + ']');
 		var curentText = target.content;
 		var newText = 'Hide Detail';
-		if (this.productMarginTop === 0) this.productMarginTop -= 200;
-		else this.productMarginTop = 0;
-		$product.css({
-			'margin-top': this.productMarginTop + 'px'
-		});
+		$product.animate({
+					'margin-top': this.productMarginTop /*+ 'px'*/
+				}, 400, function() {
+					if (_self.productMarginTop === 0) _self.productMarginTop -= 200;
+					else _self.productMarginTop = 0;
+				});
 		if (curentText !== newText) curentText = newText;
 		else curentText = 'Show Detail';
 		$(target).text(curentText);

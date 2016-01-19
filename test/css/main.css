@@ -1,10 +1,9 @@
 .container{
 	width: 315px;
 	height: 335px;
-	background-image: url(src/img/comp_plate_graybasic.png);
+	background-image: url(../src/img/comp_plate_graybasic.png);
 	border: 1px solid lightgray;
 	font-family: Geneva, Arial, Helvetica, sans-serif;
-	/*position: absolute;*/
 }
 .not-active{
 	display: none;
@@ -19,7 +18,7 @@
 .bodyInfo p+p{
 	color:lightgray;
 }
-.headerInfo,.show_detail,.bodyInfo,.naviView{
+.headerInfo,.bodyInfo,.naviView{
 	margin: 10px;
 }
 .headerInfo, .show_detail,.btn_store{

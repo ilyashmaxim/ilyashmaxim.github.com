@@ -4,14 +4,38 @@
 	function InfoBox(node) {
 		debugger;
 		this.$root = $(node);
+		var buttonsSkin = {
+					btn_left: {
+						url1: 'src/img/button_bg_white_left.png',
+						urlSelected:'src/img/button_bg_orange_left.png',
+						url2: 'src/img/btn_ic_gray_left.png',
+						position: 'left',
+						contents: 'perv'
+					},
+					btn_right: {
+						url1: 'src/img/button_bg_white_right.png',
+						urlSelected:'src/img/button_bg_orange_right.png',
+						url2: 'src/img/btn_ic_gray_right.png',
+						position: 'right',
+						contents: 'next'
+					},
+					btn_store: {
+						url1: 'src/img/button_bg_white_right.png',
+						urlSelected:'src/img/button_bg_orange_right.png',
+						url2: 'src/img/btn_ic_gray_right.png',
+						position: 'right',
+						contents: 'Find a Store'
+					}
+				};
 		this.productIndex = 1;
 		this.productMarginTop = 0;
-		this.Box = this.Builder();
+		this.Box = this.Builder(buttonsSkin);
 		this.$root.append(this.Box);
 		this.AddProductInfo();
 		this.InfoBoxEvent();
 	}
-	InfoBox.prototype.Builder = function() {
+	InfoBox.prototype.Builder = function(buttonsSkin) {
+		
 		var container = document.createElement('div');
 		$(container).addClass('container');
 		var naviView = document.createElement('div');
@@ -24,32 +48,8 @@
 		var wrapper = document.createElement('div');
 		$(wrapper).append(link);
 		$(naviView).addClass('naviView').append(wrapper);
-
-		var buttons = {
-			btn_left: {
-				url1: 'src/img/button_bg_white_left.png',
-				urlSelected:'src/img/button_bg_orange_left.png',
-				url2: 'src/img/btn_ic_gray_left.png',
-				position: 'left',
-				contents: 'perv'
-			},
-			btn_right: {
-				url1: 'src/img/button_bg_white_right.png',
-				urlSelected:'src/img/button_bg_orange_right.png',
-				url2: 'src/img/btn_ic_gray_right.png',
-				position: 'right',
-				contents: 'next'
-			},
-			btn_store: {
-				url1: 'src/img/button_bg_white_right.png',
-				urlSelected:'src/img/button_bg_orange_right.png',
-				url2: 'src/img/btn_ic_gray_right.png',
-				position: 'right',
-				contents: 'Find a Store'
-			}
-		};
-		for (var key in buttons) {
-			var btnsData = buttons[key];
+		for (var key in buttonsSkin) {
+			var btnsData = buttonsSkin[key];
 			var btn = document.createElement('div');
 			var button_bg = document.createElement('img');
 			$(button_bg).attr({
@@ -119,9 +119,9 @@
 	InfoBox.prototype.InfoBoxEvent = function() {
 		var _self = this;
 		var $buttonNext = $(this.Box).find('.naviView');
+		var $btn = $buttonNext.find('.btn');
 		$buttonNext.on('click', '.btn', _self.ShowProduct.bind(_self));
 		$buttonNext.on('click', '.show_detail', _self.HideProduct.bind(_self));
-		var $btn = $buttonNext.find('.btn');
 		$btn.hover(_self.LigthButton.bind(_self));
 	};
 	InfoBox.prototype.ShowProduct = function(event) {
@@ -167,7 +167,7 @@
 		var curentText = target.content;
 		var newText = 'Hide Detail';
 		$product.animate({
-					'margin-top': this.productMarginTop /*+ 'px'*/
+					'margin-top': this.productMarginTop
 				}, 400, function() {
 					if (_self.productMarginTop === 0) _self.productMarginTop -= 200;
 					else _self.productMarginTop = 0;

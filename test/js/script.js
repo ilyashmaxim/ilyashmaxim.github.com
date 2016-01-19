@@ -28,18 +28,21 @@
 		var buttons = {
 			btn_left: {
 				url1: 'src/img/button_bg_white_left.png',
+				urlSelected:'src/img/button_bg_orange_left.png',
 				url2: 'src/img/btn_ic_gray_left.png',
 				position: 'left',
 				contents: 'perv'
 			},
 			btn_right: {
 				url1: 'src/img/button_bg_white_right.png',
+				urlSelected:'src/img/button_bg_orange_right.pn',
 				url2: 'src/img/btn_ic_gray_right.png',
 				position: 'right',
 				contents: 'next'
 			},
 			btn_store: {
 				url1: 'src/img/button_bg_white_right.png',
+				urlSelected:'src/img/button_bg_orange_right.pn',
 				url2: 'src/img/btn_ic_gray_right.png',
 				position: 'right',
 				contents: 'Find a Store'
@@ -52,6 +55,10 @@
 			$(button_bg).attr({
 				'src': btnsData.url1,
 			}).addClass('button_bg');
+			var button_bg = document.createElement('img');
+			$(button_bg).attr({
+				'src': btnsData.url1,
+			}).addClass('button_bg selected');
 			var btn_ic = document.createElement('img');
 			$(btn_ic).attr({
 				'src': btnsData.url2,
@@ -113,6 +120,8 @@
 		var $buttonNext = $(this.Box).find('.naviView');
 		$buttonNext.on('click', '.btn', _self.ShowProduct.bind(_self));
 		$buttonNext.on('click', '.show_detail', _self.HideProduct.bind(_self));
+		var $btn = $buttonNext.find('.btn');
+		$btn.hover(_self.LigthButton.bind(_self));
 	};
 	InfoBox.prototype.ShowProduct = function(event) {
 		var target = event.currentTarget;
@@ -163,6 +172,12 @@
 		if (curentText !== newText) curentText = newText;
 		else curentText = 'Show Detail';
 		$(target).text(curentText);
+	};
+	InfoBox.prototype.LigthButton = function(event) {
+		var target = event.currentTarget;
+		var $img = $(target).find('.button_bg');
+		$img.toggleClass('selected');
+		$(target).toggleClass('selected');
 	};
 
 	window.InfoBox = InfoBox;

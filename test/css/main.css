@@ -35,9 +35,6 @@
 .show_detail{
 	margin: 10px 0;
 }
-.button_bg{
-	
-}
 .btn_ic_left, .btn_ic_right, .text_left, .text_right{
 	position: absolute;
 	top: 5px;
@@ -55,4 +52,10 @@
 .btn_store .button_bg{
 	width: 112px;
 	height: 26px;
+}
+.btn_right.selected,.btn_left.selected,.btn_store.selected{
+	color: white;
+}
+.button_bg.selected{
+	display: none;
 }

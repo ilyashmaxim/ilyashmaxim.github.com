@@ -35,14 +35,14 @@
 			},
 			btn_right: {
 				url1: 'src/img/button_bg_white_right.png',
-				urlSelected:'src/img/button_bg_orange_right.pn',
+				urlSelected:'src/img/button_bg_orange_right.png',
 				url2: 'src/img/btn_ic_gray_right.png',
 				position: 'right',
 				contents: 'next'
 			},
 			btn_store: {
 				url1: 'src/img/button_bg_white_right.png',
-				urlSelected:'src/img/button_bg_orange_right.pn',
+				urlSelected:'src/img/button_bg_orange_right.png',
 				url2: 'src/img/btn_ic_gray_right.png',
 				position: 'right',
 				contents: 'Find a Store'

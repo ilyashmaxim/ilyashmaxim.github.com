@@ -2,24 +2,35 @@
 	width: 316px;
 	height: 333px;
 	background: url(../src/img/comp_plate_graybasic.png) no-repeat; 
-    background-size: 316px 333px;
+    background-size: 317px 333px;
 	font-family: Geneva, Arial, Helvetica, sans-serif;
+	box-sizing:border-box;
+	padding:3px;
+	/*position: absolute;*/
 }
 .not-active{
 	display: none;
 }
 .productView{
-	height: 270px;
+	height: 260px;
 	overflow: hidden;
 }
 .productView p,.naviView a{
+	margin: 0;
 	font-size: 10px;
 }
 .bodyInfo p+p{
 	color:lightgray;
 }
-.headerInfo,.bodyInfo,.naviView{
-	margin: 10px;
+.headerInfo,.naviView{
+	padding: 10px 5px;
+}
+.bodyInfo{
+	padding: 0 5px;
+}
+.headerInfo{
+	margin: 0;
+	font-size:14px;
 }
 .headerInfo, .show_detail,.btn_store{
 	color: orange;
@@ -33,9 +44,6 @@
 }
 .btn_left, .btn_right{
 	color: grey;
-}
-.show_detail{
-	margin: 10px 0;
 }
 .btn_ic_left, .btn_ic_right, .text_left, .text_right{
 	position: absolute;

@@ -164,8 +164,8 @@
 		var _self = this;
 		var target = event.currentTarget;
 		var $product = $('.product').filter('[value=' + this.productIndex + ']');
-		var curentText = target.content;
-		var newText = 'Hide Detail';
+		var curentText = target.text;
+		var newText = 'Hide detail';
 		$product.animate({
 					'margin-top': this.productMarginTop
 				}, 400, function() {
@@ -173,7 +173,7 @@
 					else _self.productMarginTop = 0;
 				});
 		if (curentText !== newText) curentText = newText;
-		else curentText = 'Show Detail';
+		else curentText = 'Show detail';
 		$(target).text(curentText);
 	};
 	InfoBox.prototype.LigthButton = function(event) {

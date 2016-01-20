@@ -1,8 +1,8 @@
 .container{
-	width: 315px;
-	height: 335px;
-	background-image: url(../src/img/comp_plate_graybasic.png);
-	border: 1px solid lightgray;
+	width: 316px;
+	height: 333px;
+	background: url(../src/img/comp_plate_graybasic.png) no-repeat; 
+    background-size: 316px 333px;
 	font-family: Geneva, Arial, Helvetica, sans-serif;
 }
 .not-active{
@@ -39,21 +39,25 @@
 }
 .btn_ic_left, .btn_ic_right, .text_left, .text_right{
 	position: absolute;
-	top: 5px;
-}
-.btn_ic_left, .text_right{
-	left: 5px;
-}
-.btn_ic_right, .text_left{
-	right: 5px;
 }
 .btn_store{
-	width: 112px;
 	float: right;
 }
-.btn_store .button_bg{
-	width: 112px;
-	height: 26px;
+.btn_ic_left{
+	top: 8px;
+	left: 5px;
+}
+.btn_ic_right{
+	top: 8px;
+	right: 5px;
+}
+.text_left{
+	top: 6px;
+	right: 10px;
+}
+.text_right{
+	top: 6px;
+	left: 10px;
 }
 .btn_right.selected,.btn_left.selected,.btn_store.selected{
 	color: white;

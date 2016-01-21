@@ -125,6 +125,7 @@
 		var $btn = $buttonNext.find('.btn');
 		$buttonNext.on('click', '.btn', _self.ShowProduct.bind(_self));
 		$buttonNext.on('click', '.show_detail', _self.HideProduct.bind(_self));
+		$buttonNext.on('click', '.btn_store', _self.LinkStore.bind(_self));
 		$btn.hover(_self.LigthButton.bind(_self));
 	};
 	InfoBox.prototype.ShowProduct = function(event) {
@@ -188,6 +189,10 @@
 		var $img = $(target).find('.button_bg');
 		$img.toggleClass('selected');
 		$(target).toggleClass('selected');
+	};
+	InfoBox.prototype.LinkStore = function(event) {
+		var target = event.currentTarget;
+		window.location.href = this.storeLink[this.productIndex];
 	};
 
 	window.InfoBox = InfoBox;

@@ -1,32 +1,9 @@
 (function($) {
 	'use strict';
 
-	function InfoBox(node) {
-		debugger;
+	function InfoBox(node, buttons) {
 		this.$root = $(node);
-		var buttonsSkin = {
-					btn_left: {
-						url1: 'src/img/button_bg_white_left.png',
-						urlSelected:'src/img/button_bg_orange_left.png',
-						url2: 'src/img/btn_ic_gray_left.png',
-						position: 'left',
-						contents: 'Perv'
-					},
-					btn_right: {
-						url1: 'src/img/button_bg_white_right.png',
-						urlSelected:'src/img/button_bg_orange_right.png',
-						url2: 'src/img/btn_ic_gray_right.png',
-						position: 'right',
-						contents: 'Next'
-					},
-					btn_store: {
-						url1: 'src/img/button_bg_white_store.png',
-						urlSelected:'src/img/button_bg_orange_store.png',
-						url2: 'src/img/btn_ic_gray_right.png',
-						position: 'right',
-						contents: 'Find a Store'
-					}
-				};
+		this.buttonsSkin = buttons;
 		this.storeLink =[];
 		this.productIndex = 0;
 		this.productMarginTop = 0;
@@ -35,7 +12,7 @@
 		this.AddProductInfo();
 		this.InfoBoxEvent();
 	}
-	InfoBox.prototype.Builder = function(buttonsSkin) {
+	InfoBox.prototype.Builder = function(this.buttonsSkin) {
 		
 		var container = document.createElement('div');
 		$(container).addClass('container');
@@ -118,7 +95,6 @@
 			});
 		});
 	};
-
 	InfoBox.prototype.InfoBoxEvent = function() {
 		var _self = this;
 		var $buttonNext = $(this.Box).find('.naviView');
@@ -164,7 +140,6 @@
 			});
 		}
 	};
-
 	InfoBox.prototype.HideProduct = function(event) {
 		var _self = this;
 		var target = event.currentTarget;
@@ -194,6 +169,5 @@
 		var target = event.currentTarget;
 		window.location.href = this.storeLink[this.productIndex];
 	};
-
 	window.InfoBox = InfoBox;
 })($);

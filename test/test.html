@@ -10,8 +10,31 @@
 <body>
 <div></div>
 	<script>
+		var buttonsSkin = {
+					btn_left: {
+						url1: 'src/img/button_bg_white_left.png',
+						urlSelected:'src/img/button_bg_orange_left.png',
+						url2: 'src/img/btn_ic_gray_left.png',
+						position: 'left',
+						contents: 'Perv'
+					},
+					btn_right: {
+						url1: 'src/img/button_bg_white_right.png',
+						urlSelected:'src/img/button_bg_orange_right.png',
+						url2: 'src/img/btn_ic_gray_right.png',
+						position: 'right',
+						contents: 'Next'
+					},
+					btn_store: {
+						url1: 'src/img/button_bg_white_store.png',
+						urlSelected:'src/img/button_bg_orange_store.png',
+						url2: 'src/img/btn_ic_gray_right.png',
+						position: 'right',
+						contents: 'Find a Store'
+					}
+				};
 		var node = document.querySelector('div');
-		new InfoBox(node);
+		new InfoBox(node,buttonsSkin);
 	</script>
 </body>
 </html>

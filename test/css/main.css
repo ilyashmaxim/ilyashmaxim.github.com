@@ -6,6 +6,7 @@
 	font-family: Geneva, Arial, Helvetica, sans-serif;
 	box-sizing:border-box;
 	padding:3px;
+	line-height:1.11;
 	/*position: absolute;*/
 }
 .not-active{
@@ -16,21 +17,27 @@
 	overflow: hidden;
 }
 .productView p,.naviView a{
-	margin: 0;
 	font-size: 10px;
+}
+.productView p{
+	margin:5px 0;
 }
 .bodyInfo p+p{
 	color:lightgray;
 }
 .headerInfo,.naviView{
-	padding: 10px 5px;
+	padding: 5px 5px 0 5px;
 }
 .bodyInfo{
 	padding: 0 5px;
 }
 .headerInfo{
 	margin: 0;
-	font-size:14px;
+	font-size: 20px;
+}
+.detail{
+	max-height:100%;
+	padding-bottom: 10px;
 }
 .headerInfo, .show_detail,.btn_store{
 	color: orange;

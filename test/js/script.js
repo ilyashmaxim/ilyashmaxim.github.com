@@ -46,7 +46,7 @@
 			})
 			.text('Show detail');
 		var wrapper = document.createElement('div');
-		$(wrapper).append(link);
+		$(wrapper).addClass('detail').append(link);
 		$(naviView).addClass('naviView').append(wrapper);
 		for (var key in buttonsSkin) {
 			var btnsData = buttonsSkin[key];

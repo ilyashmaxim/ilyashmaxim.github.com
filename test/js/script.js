@@ -81,6 +81,7 @@
 		return container;
 	};
 	InfoBox.prototype.AddProductInfo = function() {
+		var _self = this;
 		var $node = this.$root.find('.productView');
 		$node.each(function(index, element) {
 			$.getJSON('./src/info_box.json', {}, function(json) {
@@ -112,7 +113,7 @@
 						.append(headerInfo)
 						.append(bodyInfo);
 					$container.append(product);
-					this.storeLink[i] = json[i].productUrl;
+					_self.storeLink[i] = json[i].productUrl;
 				}
 			});
 		});

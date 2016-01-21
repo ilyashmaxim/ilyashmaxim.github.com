@@ -12,7 +12,7 @@
 		this.AddProductInfo();
 		this.InfoBoxEvent();
 	}
-	InfoBox.prototype.Builder = function(this.buttonsSkin) {
+	InfoBox.prototype.Builder = function(buttonsSkin) {
 		
 		var container = document.createElement('div');
 		$(container).addClass('container');

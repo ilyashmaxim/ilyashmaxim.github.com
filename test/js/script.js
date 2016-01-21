@@ -112,6 +112,7 @@
 						.append(headerInfo)
 						.append(bodyInfo);
 					$container.append(product);
+					this.storeLink[i] = json.productUrl;
 				}
 			});
 		});

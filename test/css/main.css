@@ -51,6 +51,7 @@
 }
 .btn_left, .btn_right{
 	color: grey;
+	margin-right: 5px;
 }
 .btn_ic_left, .btn_ic_right, .text_left, .text_right{
 	position: absolute;

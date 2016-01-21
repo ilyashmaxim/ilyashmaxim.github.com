@@ -166,15 +166,18 @@
 		var $product = $('.product').filter('[value=' + this.productIndex + ']');
 		var curentText = target.text;
 		var newText = 'Hide detail';
+		if (this.productMarginTop === 0) this.productMarginTop -= 200;
+		else this.productMarginTop = 0;
 		$product.animate({
-					'margin-top': this.productMarginTop
-				}, 400, function() {
-					if (_self.productMarginTop === 0) _self.productMarginTop -= 200;
-					else _self.productMarginTop = 0;
-				});
-		if (curentText !== newText) curentText = newText;
-		else curentText = 'Show detail';
-		$(target).text(curentText);
+				'margin-top': _self.productMarginTop
+			}, 400, function() {
+				replaceText();
+		});
+		function replaceText (){
+			if (curentText !== newText) curentText = newText;
+			else curentText = 'Show detail';
+			$(target).text(curentText);
+		}
 	};
 	InfoBox.prototype.LigthButton = function(event) {
 		var target = event.currentTarget;

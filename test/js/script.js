@@ -27,7 +27,8 @@
 						contents: 'Find a Store'
 					}
 				};
-		this.productIndex = 1;
+		this.storeLink =[];
+		this.productIndex = 0;
 		this.productMarginTop = 0;
 		this.Box = this.Builder(buttonsSkin);
 		this.$root.append(this.Box);
@@ -90,7 +91,7 @@
 					if (i === 0) activeClass = 'product active';
 					else activeClass = 'product not-active';
 					$(product).addClass(activeClass).attr({
-						value: i + 1
+						value: i
 					});
 					var headerInfo = document.createElement('h3');
 					$(headerInfo).text(json[i].title)
@@ -129,20 +130,21 @@
 		var $products = $(this.Box).find('.product');
 		var $activeImg;
 		var $nextImg;
-		if (this.productIndex > $products.length) this.productIndex = 1;
-		if (this.productIndex < 1) this.productIndex = $products.length;
+		var slideCount = $products.length - 1;
+		if (this.productIndex > slideCount) this.productIndex = 0;
+		if (this.productIndex < 0) this.productIndex = slideCount;
 		$activeImg = $products.filter('[value=' + this.productIndex + ']');
 		if ($(target).hasClass('btn_right')) {
-			if (this.productIndex === $products.length) {
-				$nextImg = $products.filter('[value=' + 1 + ']');
+			if (this.productIndex === slideCount) {
+				$nextImg = $products.filter('[value=' + 0 + ']');
 			} else {
 				$nextImg = $products.filter('[value=' + (this.productIndex + 1) + ']');
 			}
 			this.productIndex += 1;
 			Show();
 		} else if ($(target).hasClass('btn_left')) {
-			if (this.productIndex === 1) {
-				$nextImg = $products.filter('[value=' + $products.length + ']');
+			if (this.productIndex === 0) {
+				$nextImg = $products.filter('[value=' + slideCount + ']');
 			} else {
 				$nextImg = $products.filter('[value=' + (this.productIndex - 1) + ']');
 			}

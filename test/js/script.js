@@ -33,7 +33,7 @@
 			$.getJSON('./src/info_box.json', {}, function(json) {
 				var productViewData = json;
 				var $container = $(element);
-				var cont1 = '<% _.each(productViewData, function(element, index, list) { %>'+
+				var cont1 = '<% _.each(this, function(element, index, list) { %>'+
 							'<div class="product not-active" value="<%=index%>">'+
 								'<h3 class="headerInfo"><%=element.title%></h3>'+
 								'<img src="src/img/<%=element.img%>"></img>'+

@@ -46,8 +46,8 @@
 					_self.storeLink[index] = element.productUrl;
 				});
 				var temp = _.bind(_.template(cont1, productViewData),productViewData);
-				$(temp).find('[value=0]').addClass('active').removeClass('not-active');
 				$container.append(temp);
+				$container.find('.product').filter('[value=0]').addClass('active').removeClass('not-active');
 			});
 		});
 	};

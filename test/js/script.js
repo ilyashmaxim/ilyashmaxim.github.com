@@ -13,49 +13,18 @@
 		this.InfoBoxEvent();
 	}
 	InfoBox.prototype.Builder = function(buttonsSkin) {
-		
-		var container = document.createElement('div');
-		$(container).addClass('container');
-		var naviView = document.createElement('div');
-		var link = document.createElement('a');
-		$(link).addClass('show_detail')
-			.attr({
-				href: '#'
-			})
-			.text('Show detail');
-		var wrapper = document.createElement('div');
-		$(wrapper).addClass('detail').append(link);
-		$(naviView).addClass('naviView').append(wrapper);
-		for (var key in buttonsSkin) {
-			var btnsData = buttonsSkin[key];
-			var btn = document.createElement('div');
-			var button_bg = document.createElement('img');
-			$(button_bg).attr({
-				'src': btnsData.url1,
-			}).addClass('button_bg');
-			var button_bg_selected = document.createElement('img');
-			$(button_bg_selected).attr({
-				'src': btnsData.urlSelected,
-			}).addClass('button_bg selected');
-			var btn_ic = document.createElement('img');
-			$(btn_ic).attr({
-				'src': btnsData.url2,
-			}).addClass('btn_ic_' + btnsData.position);
-			var text = document.createElement('span');
-			$(text).text(btnsData.contents)
-				.addClass('text_' + btnsData.position);
-			$(btn).addClass('btn ' + key)
-				.append(button_bg)
-				.append(button_bg_selected)
-				.append(btn_ic)
-				.append(text);
-			$(naviView).append(btn);
-		}
-
-		var productView = document.createElement('div');
-		$(productView).addClass('productView');
-		$(container).append(productView).append(naviView);
-		return container;
+		var buttonsSkin = buttonsSkin;
+		var cont = '<div class = "container">' +
+			'<div class = "productView"></div>' +
+			'<div class="naviView"><div class="detail">' +
+			'<a class="show_detail">Show detail</a></div>' +
+			'<% _.each(buttonsSkin, function(value, key, list) { %> ' +
+			'<div class="btn <%=key%>">' +
+			'<img class="button_bg" src="<%=value.url1%>"></img>' +
+			'<img class="button_bg selected" src="<%=value.urlSelected%>"></img>' +
+			'<img class="btn_ic_<%=value.position%>" src="<%=value.url2%>"></img>' +
+			'<span class="text_<%=value.position%>"><%=value.contents%></span></div><%}); %></div></div>';
+		return _.template(cont, buttonsSkin);
 	};
 	InfoBox.prototype.AddProductInfo = function() {
 		var _self = this;

@@ -35,8 +35,8 @@
 				var $container = $(element);
 				var cont1 = '<% _.each(this, function(element, index, list) { %>'+
 							'<div class="product not-active" value="<%=index%>">'+
-								'<h3 class="headerInfo"><%=element.title%></h3>'+
 								'<img src="src/img/<%=element.img%>"></img>'+
+								'<h3 class="headerInfo"><%=element.title%></h3>'+
 								'<div class="bodyInfo">'+
 									'<p><%=element.description%></p>'+
 									'<p><%=element.note%></p>'+

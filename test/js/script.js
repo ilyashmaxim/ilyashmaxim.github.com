@@ -31,39 +31,27 @@
 		var $node = this.$root.find('.productView');
 		$node.each(function(index, element) {
 			$.getJSON('./src/info_box.json', {}, function(json) {
+				var productViewData = json;
 				var $container = $(element);
-				var activeClass;
-				for (var i = 0; i < json.length; i += 1) {
-					var product = document.createElement('div');
-					if (i === 0) activeClass = 'product active';
-					else activeClass = 'product not-active';
-					$(product).addClass(activeClass).attr({
-						value: i
-					});
-					var headerInfo = document.createElement('h3');
-					$(headerInfo).text(json[i].title)
-						.addClass('headerInfo');
-					var img = document.createElement('img');
-					$(img).attr({
-						src: 'src/img/' + json[i].img
-					});
-					var bodyInfo = document.createElement('div');
-					var descriptionInfo = document.createElement('p');
-					$(descriptionInfo).text(json[i].description);
-					var noteInfo = document.createElement('p');
-					$(noteInfo).text(json[i].note);
-					$(bodyInfo).addClass('bodyInfo')
-						.append(descriptionInfo)
-						.append(noteInfo);
-					$(product).append(img)
-						.append(headerInfo)
-						.append(bodyInfo);
-					$container.append(product);
-					_self.storeLink[i] = json[i].productUrl;
-				}
+				var cont1 = '<% _.each(productViewData, function(element, index, list) { %>'+
+							'<div class="product not-active" value="<%=index%>">'+
+								'<h3 class="headerInfo"><%=element.title%></h3>'+
+								'<img src="src/img/<%=element.img%>"></img>'+
+								'<div class="bodyInfo">'+
+									'<p><%=element.description%></p>'+
+									'<p><%=element.note%></p>'+
+								'</div>'+
+							'</div><%}); %>';
+				productViewData.forEach(function(element, index){
+					_self.storeLink[index] = element.productUrl;
+				});
+				var temp = _.template(cont1, productViewData);
+				$(temp).find('[value=0]').addClass('active').removeClass('not-active');
+				$container.append(temp);
 			});
 		});
 	};
+
 	InfoBox.prototype.InfoBoxEvent = function() {
 		var _self = this;
 		var $buttonNext = $(this.Box).find('.naviView');

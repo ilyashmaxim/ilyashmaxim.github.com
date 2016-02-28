@@ -51,7 +51,7 @@
 				var temp = cont1(productViewData);
 				$container.append(temp);
 				$container.find('.product').filter('[value=0]').addClass('active').removeClass('not-active');
-			}*/this.buildProductView.bind(this));
+			}*/_self.buildProductView);
 		});
 	};
 	InfoBox.prototype.buildProductView = function(element,json) {

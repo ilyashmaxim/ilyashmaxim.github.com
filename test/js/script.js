@@ -3,8 +3,10 @@
 
 	function InfoBox(node, buttons) {
 		this.$root = $(node);
-		this.buttonsSkin = {data:buttons};
-		this.storeLink =[];
+		this.buttonsSkin = {
+			data: buttons
+		};
+		this.storeLink = [];
 		this.productIndex = 0;
 		this.productMarginTop = 0;
 		this.buildMainHtml(this.buttonsSkin);
@@ -29,26 +31,47 @@
 		var _self = this;
 		var $node = this.$root.find('.productView');
 		$node.each(function(index, element) {
-			$.getJSON('./src/info_box.json', {}, function(json) {
-				var productViewData = {data:json};
+			$.getJSON('./src/info_box.json', {}, /*function(json) {
+				var productViewData = {
+					data: json
+				};
 				var $container = $(element);
-				var cont1 = _.template('<% _.each(data, function(element, index, list) { %>'+
-							'<div class="product not-active" value="<%=index%>">'+
-								'<img src="src/img/<%=element.img%>"></img>'+
-								'<h3 class="headerInfo"><%=element.title%></h3>'+
-								'<div class="bodyInfo">'+
-									'<p><%=element.description%></p>'+
-									'<p><%=element.note%></p>'+
-								'</div>'+
-							'</div><%}); %>');
-				productViewData.data.forEach(function(element, index){
+				var cont1 = _.template('<% _.each(data, function(element, index, list) { %>' +
+					'<div class="product not-active" value="<%=index%>">' +
+					'<img src="src/img/<%=element.img%>"></img>' +
+					'<h3 class="headerInfo"><%=element.title%></h3>' +
+					'<div class="bodyInfo">' +
+					'<p><%=element.description%></p>' +
+					'<p><%=element.note%></p>' +
+					'</div>' +
+					'</div><%}); %>');
+				productViewData.data.forEach(function(element, index) {
 					_self.storeLink[index] = element.productUrl;
 				});
 				var temp = cont1(productViewData);
 				$container.append(temp);
 				$container.find('.product').filter('[value=0]').addClass('active').removeClass('not-active');
-			});
+			}*/this.buildProductView.bind(this));
 		});
+	};
+	InfoBox.prototype.buildProductView = function(element,json) {
+		var productViewData = {data: json};
+		var $container = $(element);
+		var cont1 = _.template('<% _.each(data, function(element, index, list) { %>' +
+			'<div class="product not-active" value="<%=index%>">' +
+			'<img src="src/img/<%=element.img%>"></img>' +
+			'<h3 class="headerInfo"><%=element.title%></h3>' +
+			'<div class="bodyInfo">' +
+			'<p><%=element.description%></p>' +
+			'<p><%=element.note%></p>' +
+			'</div>' +
+			'</div><%}); %>');
+		productViewData.data.forEach(function(element, index) {
+			_self.storeLink[index] = element.productUrl;
+		});
+		var temp = cont1(productViewData);
+		$container.append(temp);
+		$container.find('.product').filter('[value=0]').addClass('active').removeClass('not-active');
 	};
 
 	InfoBox.prototype.infoBoxEvent = function() {
@@ -105,11 +128,12 @@
 		if (this.productMarginTop === 0) this.productMarginTop -= 200;
 		else this.productMarginTop = 0;
 		$product.animate({
-				'margin-top': _self.productMarginTop
-			}, 400, function() {
-				replaceText();
+			'margin-top': _self.productMarginTop
+		}, 400, function() {
+			replaceText();
 		});
-		function replaceText (){
+
+		function replaceText() {
 			if (curentText !== newText) curentText = newText;
 			else curentText = 'Show detail';
 			$(target).text(curentText);

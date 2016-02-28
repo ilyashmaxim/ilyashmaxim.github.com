@@ -31,10 +31,11 @@
 		var _self = this;
 		var $node = this.$root.find('.productView');
 		$node.each(function() {
-			$.getJSON('./src/info_box.json', {}, _self.buildProductView);
+			$.getJSON('./src/info_box.json', {}, _self.buildProductView.bind(_self));
 		});
 	};
 	InfoBox.prototype.buildProductView = function(json) {
+		var _self = this;
 		var productViewData = {data: json};
 		var $container = this.$root.find('.productView');
 		var cont1 = _.template('<% _.each(data, function(element, index, list) { %>' +

@@ -7,8 +7,7 @@
 		this.storeLink =[];
 		this.productIndex = 0;
 		this.productMarginTop = 0;
-		this.Box = this.buildMainHtml(this.buttonsSkin);
-		this.$root.append(this.Box);
+		this.buildMainHtml(this.buttonsSkin);
 		this.addProductInfo();
 		this.infoBoxEvent();
 	}
@@ -23,7 +22,8 @@
 			'<img class="button_bg selected" src="<%=value.urlSelected%>"></img>' +
 			'<img class="btn_ic_<%=value.position%>" src="<%=value.url2%>"></img>' +
 			'<span class="text_<%=value.position%>"><%=value.contents%></span></div><%}); %></div></div>');
-		return cont(buttonsSkin);
+		var html = cont(buttonsSkin);
+		this.$root.append(html);
 	};
 	InfoBox.prototype.addProductInfo = function() {
 		var _self = this;
@@ -53,16 +53,16 @@
 
 	InfoBox.prototype.infoBoxEvent = function() {
 		var _self = this;
-		var $buttonNext = $(this.Box).find('.naviView');
+		var $buttonNext = this.$root.find('.naviView');
 		var $btn = $buttonNext.find('.btn');
-		$buttonNext.on('click', '.btn', _self.showProduct.bind(_self));
-		$buttonNext.on('click', '.show_detail', _self.hideProduct.bind(_self));
-		$buttonNext.on('click', '.btn_store', _self.linkStore.bind(_self));
-		$btn.hover(_self.ligthButton.bind(_self));
+		$buttonNext.on('click', '.btn', this.showProduct.bind(this));
+		$buttonNext.on('click', '.show_detail', this.hideProduct.bind(this));
+		$buttonNext.on('click', '.btn_store', this.linkStore.bind(this));
+		$btn.hover(this.ligthButton.bind(this));
 	};
 	InfoBox.prototype.showProduct = function(event) {
 		var target = event.currentTarget;
-		var $products = $(this.Box).find('.product');
+		var $products = this.$root.find('.product');
 		var $activeImg;
 		var $nextImg;
 		var slideCount = $products.length - 1;

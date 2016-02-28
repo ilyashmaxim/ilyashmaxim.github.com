@@ -7,13 +7,12 @@
 		this.storeLink =[];
 		this.productIndex = 0;
 		this.productMarginTop = 0;
-		this.Box = this.Builder(this.buttonsSkin);
+		this.Box = this.buildMainHtml(this.buttonsSkin);
 		this.$root.append(this.Box);
-		this.AddProductInfo();
-		this.InfoBoxEvent();
+		this.addProductInfo();
+		this.infoBoxEvent();
 	}
-	InfoBox.prototype.Builder = function(buttonsSkin) {
-		//var buttonsSkin = buttonsSkin;
+	InfoBox.prototype.buildMainHtml = function(buttonsSkin) {
 		var cont = _.template('<div class = "container">' +
 			'<div class = "productView"></div>' +
 			'<div class="naviView"><div class="detail">' +
@@ -26,7 +25,7 @@
 			'<span class="text_<%=value.position%>"><%=value.contents%></span></div><%}); %></div></div>');
 		return cont(buttonsSkin);
 	};
-	InfoBox.prototype.AddProductInfo = function() {
+	InfoBox.prototype.addProductInfo = function() {
 		var _self = this;
 		var $node = this.$root.find('.productView');
 		$node.each(function(index, element) {
@@ -52,16 +51,16 @@
 		});
 	};
 
-	InfoBox.prototype.InfoBoxEvent = function() {
+	InfoBox.prototype.infoBoxEvent = function() {
 		var _self = this;
 		var $buttonNext = $(this.Box).find('.naviView');
 		var $btn = $buttonNext.find('.btn');
-		$buttonNext.on('click', '.btn', _self.ShowProduct.bind(_self));
-		$buttonNext.on('click', '.show_detail', _self.HideProduct.bind(_self));
-		$buttonNext.on('click', '.btn_store', _self.LinkStore.bind(_self));
-		$btn.hover(_self.LigthButton.bind(_self));
+		$buttonNext.on('click', '.btn', _self.showProduct.bind(_self));
+		$buttonNext.on('click', '.show_detail', _self.hideProduct.bind(_self));
+		$buttonNext.on('click', '.btn_store', _self.linkStore.bind(_self));
+		$btn.hover(_self.ligthButton.bind(_self));
 	};
-	InfoBox.prototype.ShowProduct = function(event) {
+	InfoBox.prototype.showProduct = function(event) {
 		var target = event.currentTarget;
 		var $products = $(this.Box).find('.product');
 		var $activeImg;
@@ -97,7 +96,7 @@
 			});
 		}
 	};
-	InfoBox.prototype.HideProduct = function(event) {
+	InfoBox.prototype.hideProduct = function(event) {
 		var _self = this;
 		var target = event.currentTarget;
 		var $product = $('.product').filter('[value=' + this.productIndex + ']');
@@ -116,13 +115,13 @@
 			$(target).text(curentText);
 		}
 	};
-	InfoBox.prototype.LigthButton = function(event) {
+	InfoBox.prototype.ligthButton = function(event) {
 		var target = event.currentTarget;
 		var $img = $(target).find('.button_bg');
 		$img.toggleClass('selected');
 		$(target).toggleClass('selected');
 	};
-	InfoBox.prototype.LinkStore = function(event) {
+	InfoBox.prototype.linkStore = function(event) {
 		var target = event.currentTarget;
 		window.location.href = this.storeLink[this.productIndex];
 	};

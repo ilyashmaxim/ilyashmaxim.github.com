@@ -30,33 +30,13 @@
 	InfoBox.prototype.addProductInfo = function() {
 		var _self = this;
 		var $node = this.$root.find('.productView');
-		$node.each(function(index, element) {
-			$.getJSON('./src/info_box.json', {}, /*function(json) {
-				var productViewData = {
-					data: json
-				};
-				var $container = $(element);
-				var cont1 = _.template('<% _.each(data, function(element, index, list) { %>' +
-					'<div class="product not-active" value="<%=index%>">' +
-					'<img src="src/img/<%=element.img%>"></img>' +
-					'<h3 class="headerInfo"><%=element.title%></h3>' +
-					'<div class="bodyInfo">' +
-					'<p><%=element.description%></p>' +
-					'<p><%=element.note%></p>' +
-					'</div>' +
-					'</div><%}); %>');
-				productViewData.data.forEach(function(element, index) {
-					_self.storeLink[index] = element.productUrl;
-				});
-				var temp = cont1(productViewData);
-				$container.append(temp);
-				$container.find('.product').filter('[value=0]').addClass('active').removeClass('not-active');
-			}*/_self.buildProductView);
+		$node.each(function() {
+			$.getJSON('./src/info_box.json', {}, _self.buildProductView);
 		});
 	};
 	InfoBox.prototype.buildProductView = function(json) {
 		var productViewData = {data: json};
-		var $container = $(element);
+		var $container = this.$root.find('.productView');
 		var cont1 = _.template('<% _.each(data, function(element, index, list) { %>' +
 			'<div class="product not-active" value="<%=index%>">' +
 			'<img src="src/img/<%=element.img%>"></img>' +

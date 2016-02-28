@@ -3,37 +3,37 @@
 
 	function InfoBox(node, buttons) {
 		this.$root = $(node);
-		this.buttonsSkin = buttons;
+		this.buttonsSkin = {data:buttons};
 		this.storeLink =[];
 		this.productIndex = 0;
 		this.productMarginTop = 0;
-		this.Box = this.Builder(buttonsSkin);
+		this.Box = this.Builder(this.buttonsSkin);
 		this.$root.append(this.Box);
 		this.AddProductInfo();
 		this.InfoBoxEvent();
 	}
 	InfoBox.prototype.Builder = function(buttonsSkin) {
-		var buttonsSkin = buttonsSkin;
-		var cont = '<div class = "container">' +
+		//var buttonsSkin = buttonsSkin;
+		var cont = _.template('<div class = "container">' +
 			'<div class = "productView"></div>' +
 			'<div class="naviView"><div class="detail">' +
 			'<a class="show_detail">Show detail</a></div>' +
-			'<% _.each(buttonsSkin, function(value, key, list) { %> ' +
+			'<% _.each(data, function(value, key, list) { %> ' +
 			'<div class="btn <%=key%>">' +
 			'<img class="button_bg" src="<%=value.url1%>"></img>' +
 			'<img class="button_bg selected" src="<%=value.urlSelected%>"></img>' +
 			'<img class="btn_ic_<%=value.position%>" src="<%=value.url2%>"></img>' +
-			'<span class="text_<%=value.position%>"><%=value.contents%></span></div><%}); %></div></div>';
-		return _.template(cont, buttonsSkin);
+			'<span class="text_<%=value.position%>"><%=value.contents%></span></div><%}); %></div></div>');
+		return cont(buttonsSkin);
 	};
 	InfoBox.prototype.AddProductInfo = function() {
 		var _self = this;
 		var $node = this.$root.find('.productView');
 		$node.each(function(index, element) {
 			$.getJSON('./src/info_box.json', {}, function(json) {
-				var productViewData = json;
+				var productViewData = {data:json};
 				var $container = $(element);
-				var cont1 = '<% _.each(this, function(element, index, list) { %>'+
+				var cont1 = _.template('<% _.each(data, function(element, index, list) { %>'+
 							'<div class="product not-active" value="<%=index%>">'+
 								'<img src="src/img/<%=element.img%>"></img>'+
 								'<h3 class="headerInfo"><%=element.title%></h3>'+
@@ -41,11 +41,11 @@
 									'<p><%=element.description%></p>'+
 									'<p><%=element.note%></p>'+
 								'</div>'+
-							'</div><%}); %>';
-				productViewData.forEach(function(element, index){
+							'</div><%}); %>');
+				productViewData.data.forEach(function(element, index){
 					_self.storeLink[index] = element.productUrl;
 				});
-				var temp = _.bind(_.template(cont1, productViewData),productViewData);
+				var temp = cont1(productViewData);
 				$container.append(temp);
 				$container.find('.product').filter('[value=0]').addClass('active').removeClass('not-active');
 			});

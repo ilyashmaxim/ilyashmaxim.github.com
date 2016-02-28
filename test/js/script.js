@@ -54,7 +54,7 @@
 			}*/_self.buildProductView);
 		});
 	};
-	InfoBox.prototype.buildProductView = function(element,json) {
+	InfoBox.prototype.buildProductView = function(json) {
 		var productViewData = {data: json};
 		var $container = $(element);
 		var cont1 = _.template('<% _.each(data, function(element, index, list) { %>' +

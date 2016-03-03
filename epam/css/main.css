@@ -37,15 +37,10 @@
 }
 .detail{
 	max-height:100%;
-	margin-bottom: 10px;
-	background-color: lightgrey;
+	padding-bottom: 10px;
 }
 .headerInfo, .show_detail,.btn_store{
-	color: darkgrey;
-}
-.btn_left img, .btn_right img{
-	max-width: 70px;
-	height: 100%;
+	color: orange;
 }
 .btn_left, .btn_right,.btn_store{
 	cursor: pointer;
@@ -58,22 +53,30 @@
 	color: grey;
 	margin-right: 5px;
 }
-.text_left, .text_right{
+.btn_ic_left, .btn_ic_right, .text_left, .text_right{
 	position: absolute;
 }
 .btn_store{
 	float: right;
 }
-.text_left{
+.btn_ic_left{
 	top: 8px;
-	right: 12px;
+	left: 5px;
+}
+.btn_ic_right{
+	top: 8px;
+	right: 5px;
+}
+.text_left{
+	top: 6px;
+	right: 10px;
 }
 .text_right{
-	top: 8px;
-	left: 12px;
+	top: 6px;
+	left: 10px;
 }
 .btn_right.selected,.btn_left.selected,.btn_store.selected{
-	color: red;
+	color: white;
 }
 .button_bg.selected{
 	display: none;

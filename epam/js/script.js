@@ -17,12 +17,12 @@
 		var cont = _.template('<div class = "container">' +
 			'<div class = "productView"></div>' +
 			'<div class="naviView"><div class="detail">' +
-			'<center><a class="show_detail">Show detail</a></center>'+
-			'</div>' +
+			'<a class="show_detail">Show detail</a></div>' +
 			'<% _.each(data, function(value, key, list) { %> ' +
 			'<div class="btn <%=key%>">' +
 			'<img class="button_bg" src="<%=value.url1%>"></img>' +
 			'<img class="button_bg selected" src="<%=value.urlSelected%>"></img>' +
+			'<img class="btn_ic_<%=value.position%>" src="<%=value.url2%>"></img>' +
 			'<span class="text_<%=value.position%>"><%=value.contents%></span></div><%}); %></div></div>');
 		var html = cont(buttonsSkin);
 		this.$root.append(html);
@@ -80,7 +80,7 @@
 				$nextImg = $products.filter('[value=' + (this.productIndex + 1) + ']');
 			}
 			this.productIndex += 1;
-			Show();
+			show();
 		} else if ($(target).hasClass('btn_left')) {
 			if (this.productIndex === 0) {
 				$nextImg = $products.filter('[value=' + slideCount + ']');
@@ -88,12 +88,12 @@
 				$nextImg = $products.filter('[value=' + (this.productIndex - 1) + ']');
 			}
 			this.productIndex -= 1;
-			Show();
+			show();
 		} else {
 			this.productIndex = this.productIndex;
 		}
 
-		function Show() {
+		function show() {
 			$('.productView').animate(800, function() {
 				$activeImg.addClass('not-active').removeClass('active');
 				$nextImg.addClass('active').removeClass('not-active');

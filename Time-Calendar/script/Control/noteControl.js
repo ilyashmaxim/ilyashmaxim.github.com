@@ -10,7 +10,7 @@
 			currentNote: target.lastChild.textContent
 		};
 		var nodeTempl, nodeHtml;
-		nodeTempl = this.noteView.getNoteTempl();
+		nodeTempl = this.noteView.getNoteTempl.bind(this);
 		nodeHtml = Mustache.to_html(nodeTempl, noteData);
 		this.$root.html('').append(nodeHtml);
 	};

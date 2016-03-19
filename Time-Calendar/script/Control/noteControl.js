@@ -1,18 +1,22 @@
-(function(){
+(function() {
 	'use strict';
-	function NoteCalendarControler() {
-		this.noteView = new NoteCalendarView();
+
+	function DayNote(node) {
+		this.$root = node;
+		this.dayModel = new DayModel();
+		this.dayView = new NoteCalendarView();
+		this.switchWeek();
 	}
-	NoteCalendarControler.prototype.renderNote = function(event) {
-		var target = event.target.parentNode;
-		var noteData = {
-			currentDay: target.firstChild.textContent,
-			currentNote: target.lastChild.textContent
-		};
-		var nodeTempl, nodeHtml;
-		nodeTempl = this.noteControl.noteView.getNoteTempl();
+	DayNote.prototype.renderDay = function(event) {
+		var nodeTempl, nodeHtml, noteData;
+		noteData = this.dayModel.getNoteData(event.target.textContent); //должен приходить только нужный день
+		nodeTempl = this.dayView.getNoteTempl();
 		nodeHtml = Mustache.to_html(nodeTempl, noteData);
 		this.$root.html('').append(nodeHtml);
 	};
-	window.NoteCalendarControler = NoteCalendarControler;
+	DayNote.prototype.switchWeek = function() {
+		var $bnt = this.$root.find('.js-weekday');
+		$bnt.on('click', this.renderDay.bind(this));
+	};
+	window.DayNote = DayNote;
 })();

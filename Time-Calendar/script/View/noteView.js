@@ -6,8 +6,8 @@
 
 		var initNoteTempl = function() {
 			note = '<center><table>' +
-				'<thead "><tr><td class="weekday">{{currentDay}}</td></tr></thead>' +
-				'<tbody><tr><td class="note">{{currentNote}}</td></tr></tbody>' +
+				'<thead "><tr><td class="weekday">{{dayName}}</td></tr></thead>' +
+				'<tbody>{{#noteInfo}}<tr><td class="note">{{note}}</td></tr>{{/noteInfo}}</tbody>' +
 				'</table></center>';
 		};
 		initNoteTempl();

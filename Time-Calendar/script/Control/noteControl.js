@@ -1,22 +1,25 @@
 (function() {
 	'use strict';
 
-	function DayNote(node) {
+	function DayNote(node, model) {
 		this.$root = node;
-		this.dayModel = new DayModel();
+		this.dayModel = model;
 		this.dayView = new NoteCalendarView();
+		this.nodeHtml;
 		this.switchWeek();
 	}
 	DayNote.prototype.renderDay = function(event) {
 		var nodeTempl, nodeHtml, noteData;
-		noteData = this.dayModel.getNoteData(event.target.textContent); //должен приходить только нужный день
+		noteData = this.dayModel;
 		nodeTempl = this.dayView.getNoteTempl();
-		nodeHtml = Mustache.to_html(nodeTempl, noteData);
-		this.$root.html('').append(nodeHtml);
+		this.nodeHtml = Mustache.to_html(nodeTempl, noteData);
+	};
+	DayNote.prototype.appendNote = function() {
+		this.$root.html('').append(this.nodeHtml);
 	};
 	DayNote.prototype.switchWeek = function() {
-		var $bnt = this.$root.find('.js-weekday');
-		$bnt.on('click', this.renderDay.bind(this));
+		var $bnt = this.$root.find('.js-weekday').filter('[value=' + this.dayModel.dayIndex + ']');
+		$bnt.on('click', this.appendNote.bind(this));
 	};
 	window.DayNote = DayNote;
 })();
